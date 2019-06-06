@@ -1,4 +1,4 @@
-package it.uniroma3.siw.SilphSpa;
+package it.uniroma3.siw.silphspa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
