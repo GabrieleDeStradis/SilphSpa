@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>it.uniroma3.siw</groupId>
-	<artifactId>demo-spring</artifactId>
+	<artifactId>silphspa</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo-spring</name>
-	<description>Demo project for Spring Boot</description>
+	<name>SilphSpa</name>
+	<description>Project for siw exam SilphSpa</description>
 
 	<properties>
 		<java.version>1.8</java.version>
