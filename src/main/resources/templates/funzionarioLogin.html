@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="UTF-8">
+<title>Login page</title>
+</head>
+<body>
+	<h4>Effettua il login</h4>
+	<form th:action="@{/login}" method="POST"
+		th:object="${funzionarioForm}">
+		<label for="username">Username</label> <input type="text"
+			id="username" name="username" autofocus="autofocus" /> <label
+			for="password">Password</label> <input type="password" id="password"
+			name="password" /> <br />
+
+		<button type="submit">Login</button>
+	</form>
+</body>
+</html>

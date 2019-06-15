@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+body {
+	background-image: url("src/main/resources/images/homePageImage.jpg");
+}
+
+.topnavbar {
+	background-color: lime;
+}
+.topnavbar h1 {
+	float: center;
+}
+
+.title {
+	font-family: fantasy;
+	text-align: center;
+	color: green;
+}
+
+.body {
+	font-family: cursive; 
+}
+
+.searchbar {
+	float: center;
+	background-color: gray;
+}
+.searchbar input {
+	float: center;
+}
+.searchbar select {
+	float: left;
+}
+.searchbar button {
+	float: right;
+}

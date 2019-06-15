@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css" />
+<title>HomePage</title>
+</head>
+<body>	
+	<div class="topnavbar">
+		<h1 class="title"><b>Silph Spa</b></h1>
+		<br>
+		<a th:href="@{/}">Home</a>
+		<span>	</span>
+		<a th:href="@{/about}">About</a>
+		<a th:href="@{/login}">LoginFunzionario</a>
+	</div>
+	
+	<br/>
+	<br/>
+	<br/>
+	
+	<form th:action="@{/search}" th:object="${search_query}" method="post" class="searchbar">
+		<input th:field="*{query}" type="text" placeholder="Search...">
+		<select>
+			<optgroup th:field="*{type}">
+				<option title="fotografie">Fotografie</option>
+				<option title="fotografi">Fotografi</option>
+				<option title="album">Album</option>
+			</optgroup>
+		</select>
+		<button type="submit"><img src="src/main/resources/icons/search.png"></img></button>
+	</form>
+</body>
+</html>
