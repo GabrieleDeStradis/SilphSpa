@@ -24,10 +24,12 @@ public class Fotografo {
 	public Fotografo(String nome, String cognome) {
 		this.nome = nome;
 		this.cognome = cognome;
+		this.foto = new LinkedList<>();
 		this.albums = new LinkedList<>();
 	}
 	
 	public Fotografo() {
+		this.foto = new LinkedList<>();
 		this.albums = new LinkedList<>();
 	}
 	

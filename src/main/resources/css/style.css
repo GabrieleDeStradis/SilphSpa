@@ -17,6 +17,13 @@ body {
 	color: green;
 }
 
+.invalid_message {
+	font-family: cursive;
+	color: red;
+	font-size: small;
+	font-style: italic;
+}
+
 .body {
 	font-family: cursive; 
 }

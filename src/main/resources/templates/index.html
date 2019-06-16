@@ -3,7 +3,7 @@
 	xmlns="http://www.w3.org/1999/html">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="../css/style.css" />
 <title>HomePage</title>
 </head>
 <body>	
@@ -22,14 +22,21 @@
 	
 	<form th:action="@{/search}" th:object="${search_query}" method="post" class="searchbar">
 		<input th:field="*{query}" type="text" placeholder="Search...">
-		<select>
-			<optgroup th:field="*{type}">
-				<option title="fotografie">Fotografie</option>
-				<option title="fotografi">Fotografi</option>
-				<option title="album">Album</option>
+		<select th:field="*{type}">
+			<optgroup>
+				<option title="fotografia" value="Fotografia">Fotografia</option>
+				<option title="fotografo" value="Fotografo">Fotografo</option>
+				<option title="album" value="Album">Album</option>
 			</optgroup>
 		</select>
-		<button type="submit"><img src="src/main/resources/icons/search.png"></img></button>
+		<button type="submit"><img src="../icons/search.png"></img></button>
+		
+		<br/>
+		<span class="invalid_message" th:if="${#fields.hasErrors('query')}" th:errors="*{query}"></span>
+		<br/>
+		<span class="invalid_message" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></span>
+		<br>
+		<span th:text="*{type}"></span>
 	</form>
 </body>
 </html>

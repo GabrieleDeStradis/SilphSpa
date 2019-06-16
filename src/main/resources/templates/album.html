@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../css/style.css" />
+<title>AlbumPage</title>
+</head>
+<body>
+	<div class="topnavbar">
+		<h1 class="title"><b>Silph Spa</b></h1>
+		<br>
+		<a th:href="@{/}">Home</a>
+		<span>	</span>
+		<a th:href="@{/about}">About</a>
+	</div>
+	
+	<br/>
+	<br/>
+	<br/>
+	
+	
+	<div><h3 class="title">Album</h3></div>
+	<table th:object="${album}">
+		<tr>
+			<td>Nome: </td>
+			<td th:text="*{nome}">nome_album</td>
+		</tr>
+		<tr>
+			<td>Data registrazione: </td>
+			<td th:text="${#temporals.formatISO(*{dataRegistrazione})}">data_album</td>
+		</tr>
+		<tr>
+			<td>
+				<a th:href="@{'/fotografieAlbum/'+*{id}}" th:text="Fotografie">fotografie_album</a>
+			</td>
+		</tr>
+	</table>
+
+</body>
+</html>
