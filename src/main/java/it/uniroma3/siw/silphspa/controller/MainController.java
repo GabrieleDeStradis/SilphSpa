@@ -45,7 +45,7 @@ public class MainController {
 		String nextPage = "index";
 		this.searchQueryValidator.validate(searchQuery,bindingResult);
 		if (!bindingResult.hasErrors()) {
-			// eseguo un controllo sul tipo di ricerca
+			/* eseguo un controllo sul tipo di ricerca */
 			if (searchQuery.getType().equals("Fotografia")) { //ricerca per Fotografia
 				model.addAttribute("fotografia", this.fotografiaService.cercaPerNome(searchQuery.getQuery()));
 				nextPage = "fotografia";

@@ -10,7 +10,7 @@ public class Fotografia {
 	private Long id;
 	@Column(nullable = false)
 	private String nome;
-	@Column(nullable=false) //la logica dietro al caricamento delle immagini non risponde questo attributo nullo
+	@Column(nullable=false) //la logica del caricamento delle immagini non risponderebbe se questo attributo fosse nullo
 	private byte[] immagine;
 	@ManyToOne
 	private Fotografo fotografo;

@@ -2,6 +2,9 @@ HELP.md
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
+### SilphSpa Project ###
+/src/main/resources/static/downloads_silph/
+
 ### Eclipse ###
 .metadata
 bin/
