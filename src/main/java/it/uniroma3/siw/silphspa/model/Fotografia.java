@@ -12,6 +12,7 @@ public class Fotografia {
 	private Long id;
 	@Column(nullable = false)
 	private String nome;
+
 	//@Column(nullable=false)
 	private File immagine;
 	@ManyToOne

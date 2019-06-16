@@ -3,6 +3,7 @@ package it.uniroma3.siw.silphspa.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
 import it.uniroma3.siw.silphspa.model.Fotografia;
 import it.uniroma3.siw.silphspa.repository.FotografiaRepository;
@@ -18,9 +19,12 @@ public class FotografiaService {
 		return this.fotografiaRepository.findByNome(nome);
 	}
 	
-	@Transactional
-	public Fotografia salva(Fotografia target) {
-		return this.fotografiaRepository.save(target);
+	public Fotografia inserisci(Fotografia fotografia){
+		return this.fotografiaRepository.save(fotografia);
 	}
 	
+	@Transactional
+	public List<Fotografia> tutte(){
+		return (List<Fotografia>) this.fotografiaRepository.findAll();
+	}
 }

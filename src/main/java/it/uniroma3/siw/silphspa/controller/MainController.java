@@ -40,14 +40,14 @@ public class MainController {
 	public String homePage(Model model) {
 		/* REMOVE NEXT BLOCK, IT'S IN ORDER TO HAVE SOME TEMPORARY TEST OBJECT IN APPLICATION */
 		Fotografo fo = new Fotografo("Mario","Rossi");
-		fotografoService.salva(fo);
+		fotografoService.inserisci(fo);
 		Album a = new Album("album");
 		fo.addAlbum(a);
-		albumService.salva(a);
+		albumService.inserisci(a);
 		Fotografia fa = new Fotografia("foto", fo, a);
 		a.addFotografia(fa);
 		fo.addFoto(fa);
-		fotografiaService.salva(fa);
+		fotografiaService.inserisci(fa);
 		
 		model.addAttribute("search_query", new SearchQuery());
 		return "index";

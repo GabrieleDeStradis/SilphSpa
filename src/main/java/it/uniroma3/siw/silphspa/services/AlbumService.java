@@ -19,7 +19,7 @@ public class AlbumService {
 	}
 	
 	@Transactional
-	public Album salva(Album target) {
+	public Album inserisci(Album target) {
 		return this.albumRepository.save(target);
 	}
 

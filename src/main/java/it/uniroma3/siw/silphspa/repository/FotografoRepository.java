@@ -7,5 +7,4 @@ import it.uniroma3.siw.silphspa.model.Fotografo;
 public interface FotografoRepository extends CrudRepository<Fotografo,Long> {
 
 	public Fotografo findByNome(String nome);
-	
 }
