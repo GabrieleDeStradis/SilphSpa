@@ -1,7 +1,5 @@
 package it.uniroma3.siw.silphspa.model;
 
-import java.io.File;
-
 import javax.persistence.*;
 
 @Entity
@@ -12,9 +10,8 @@ public class Fotografia {
 	private Long id;
 	@Column(nullable = false)
 	private String nome;
-
-	//@Column(nullable=false)
-	private File immagine;
+	@Column(nullable=false) //la logica dietro al caricamento delle immagini non risponde questo attributo nullo
+	private byte[] immagine;
 	@ManyToOne
 	private Fotografo fotografo;
 	@ManyToOne
@@ -72,11 +69,11 @@ public class Fotografia {
 		this.album = album;
 	}
 
-	public File getImmagine() {
+	public byte[] getImmagine() {
 		return immagine;
 	}
 
-	public void setImmagine(File file) {
+	public void setImmagine(byte[] file) {
 		this.immagine = file;
 	}
 	

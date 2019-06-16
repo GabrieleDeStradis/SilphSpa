@@ -3,7 +3,7 @@
 	xmlns="http://www.w3.org/1999/html">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="/css/style.css" />
 <title>HomePage</title>
 </head>
 <body>	
@@ -29,14 +29,16 @@
 				<option title="album" value="Album">Album</option>
 			</optgroup>
 		</select>
-		<button type="submit"><img src="../icons/search.png"></img></button>
+		<button type="submit"><img src="/icons/search.png"></img></button>
 		
 		<br/>
 		<span class="invalid_message" th:if="${#fields.hasErrors('query')}" th:errors="*{query}"></span>
-		<br/>
-		<span class="invalid_message" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></span>
-		<br>
-		<span th:text="*{type}"></span>
 	</form>
+	
+	<br/>
+	<br/>
+	<br/>
+	
+	<div>Visualizza tutte le foto cliccando <a th:href="@{/gallery}">qui</a>!</div>
 </body>
 </html>

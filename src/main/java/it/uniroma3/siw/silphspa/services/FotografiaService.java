@@ -15,6 +15,11 @@ public class FotografiaService {
 	private FotografiaRepository fotografiaRepository;
 	
 	@Transactional
+	public Fotografia cercaPerId(Long id) {
+		return this.fotografiaRepository.findById(id).get();
+	}
+	
+	@Transactional
 	public Fotografia cercaPerNome(String nome) {
 		return this.fotografiaRepository.findByNome(nome);
 	}

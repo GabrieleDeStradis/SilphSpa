@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import it.uniroma3.siw.silphspa.model.Album;
-import it.uniroma3.siw.silphspa.model.Fotografia;
-import it.uniroma3.siw.silphspa.model.Fotografo;
 import it.uniroma3.siw.silphspa.model.SearchQuery;
 import it.uniroma3.siw.silphspa.services.AlbumService;
 import it.uniroma3.siw.silphspa.services.FotografiaService;
@@ -37,18 +34,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/",method=RequestMethod.GET)
-	public String homePage(Model model) {
-		/* REMOVE NEXT BLOCK, IT'S IN ORDER TO HAVE SOME TEMPORARY TEST OBJECT IN APPLICATION */
-		Fotografo fo = new Fotografo("Mario","Rossi");
-		fotografoService.inserisci(fo);
-		Album a = new Album("album");
-		fo.addAlbum(a);
-		albumService.inserisci(a);
-		Fotografia fa = new Fotografia("foto", fo, a);
-		a.addFotografia(fa);
-		fo.addFoto(fa);
-		fotografiaService.inserisci(fa);
-		
+	public String homePage(Model model) {		
 		model.addAttribute("search_query", new SearchQuery());
 		return "index";
 	}
