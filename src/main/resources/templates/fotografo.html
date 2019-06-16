@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<body>
+	<div>
+		<h4>Fotografo</h4>
+		<div>
+		Nome: <span th:text="${fotografo.nome}">Mario</span>
+		</div>
+		<div>
+		Cognome: <span th:text="${fotografo.cognome}">Rossi</span>
+		</div>
+		<!-- <div>
+		<a th:href="@{/album/{id}}">Album</a>
+		</div>  -->
+	</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<body>
+	<div>
+		<h4>Elenco fotografi partner di SilphSpa</h4>
+		<ul>
+			<li th:each="fotografo : ${fotografi}"> 
+				<a
+				th:href="@{'/fotografo/' + ${fotografo.id}}"
+				th:text="${fotografo.nome}">mario rossi</a>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

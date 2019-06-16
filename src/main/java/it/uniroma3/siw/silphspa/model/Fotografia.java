@@ -10,6 +10,8 @@ public class Fotografia {
 	private Long id;
 	@Column(nullable = false)
 	private String nome;
+	@Column(nullable = false)
+	private String cognome;
 	@ManyToOne
 	private Fotografo fotografo;
 	@ManyToOne
@@ -49,6 +51,14 @@ public class Fotografia {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getCognome() {
+		return cognome;
+	}
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
 	}
 
 	public Fotografo getFotografo() {
