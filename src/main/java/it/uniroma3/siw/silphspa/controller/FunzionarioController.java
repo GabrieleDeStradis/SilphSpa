@@ -17,5 +17,13 @@ public class FunzionarioController {
 		return "fotografoIndex.html";
 		
 	}
+	
+	@RequestMapping("/indiceAlbum")
+	public String album() {
+		return "albumIndex.html";
+		
+	}
+	
+	
 
 }

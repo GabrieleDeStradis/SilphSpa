@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.silphspa.model.Fotografia;
+import it.uniroma3.siw.silphspa.model.Fotografo;
 import it.uniroma3.siw.silphspa.services.FotografiaService;
 
 @Controller
@@ -133,4 +134,5 @@ public class FotografiaController {
 		model.addAttribute("files_scaricati", files);
 		return "gallery";
 	}
+	
 }

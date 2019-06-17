@@ -17,6 +17,8 @@ public class Album {
 	private LocalDate dataRegistrazione;
 	@OneToMany
 	private List<Fotografia> fotografie;
+	@ManyToOne
+	private Fotografo fotografo;
 	
 	public Album(String nome) {
 		this.nome = nome;
@@ -56,6 +58,14 @@ public class Album {
 		this.fotografie = listaFotografie;
 	}
 	
+	public Fotografo getFotografo() {
+		return fotografo;
+	}
+
+	public void setFotografo(Fotografo fotografo) {
+		this.fotografo = fotografo;
+	}
+
 	public boolean addFotografia(Fotografia fotografia) {
 		return this.fotografie.add(fotografia);
 	}
