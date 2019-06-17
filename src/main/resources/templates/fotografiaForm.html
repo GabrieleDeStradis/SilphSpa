@@ -8,7 +8,7 @@
 <body>
 	<h3>Seleziona la foto per salvarla nel db</h3>
 	<form th:action="@{/upload}" enctype="multipart/form-data" th:object="${fotografia}" method="post">
-		Nome: <input type="text" th:field="*{nome}">
+		Nome: <input type="text" th:field="*{nome}" required>
 		<br/>
 		<input type="file" name="image_file" accept=".jpg, .jpeg" required>
 		<br/>

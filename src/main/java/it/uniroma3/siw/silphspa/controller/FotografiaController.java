@@ -3,6 +3,7 @@ package it.uniroma3.siw.silphspa.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class FotografiaController {
 	private FotografiaService fotoService;
 
 	/* path della directory per la gestione della galleria di immagini */
-	private String download_path = System.getProperty("user.dir")+"/src/main/resources/static/downloads_silph/";
+	private static String download_path = System.getProperty("user.dir")+"/src/main/resources/static/downloads_silph/";
 	
 	/**
 	 * Questo metodo gestisce il caricamento sul database di un oggetto fotografia 
@@ -40,8 +41,8 @@ public class FotografiaController {
 			foto.setImmagine(file.getBytes());
 			Fotografia savedFoto = this.fotoService.inserisci(foto);
 			model.addAttribute("foto", savedFoto);
-			if (downloadMethod(savedFoto))
-				return "fotografia";
+			if (downloadMethod(savedFoto)!=null)
+				return "fotografiaSalvata";
 			else {
 				model.addAttribute("erroreIO", "non sono riuscito a creare il file dall'array di byte");
 				return "myErrorPage";
@@ -56,18 +57,19 @@ public class FotografiaController {
 	/**
 	 * Questo metodo prende un oggetto Fotografia e ne crea il relativo file .jpg nella directory destinata alla gallery
 	 * @param foto - oggetto di tipo Fotografia
-	 * @return true se la creazione e' andata a buon fine, false altrimenti
+	 * @return la stringa al percorso da usare nelle pagine html, null altrimenti
 	 */
-	private boolean downloadMethod(Fotografia foto) {
-		File file = new File(download_path+foto.getId().toString()+"_"+foto.getNome()+".jpg");
+	protected static String downloadMethod(Fotografia foto) {
+		String file_name = foto.getId().toString()+"_"+foto.getNome()+".jpg";
+		File file = new File(download_path+file_name);
 		try {
 			FileOutputStream fos = new FileOutputStream(file);
 			fos.write(foto.getImmagine());
 			fos.close();
-			return true;
+			return "/downloads_silph/"+file_name;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
 	}
 	
@@ -114,13 +116,21 @@ public class FotografiaController {
 			model.addAttribute("erroreIO", "non riesco a creare la cartella downloads_silph");
 			return "myErrorPage";
 		}
-		/* riempio la directory creando i relativi file .jpg */
+		/* riempio la directory creando i relativi file .jpg
+		 * inoltre creo una lista con tutti i percorsi relativi ai files creati */
+		List<String> files = new LinkedList<>();
+		String temp_filepath = null;
 		for (Fotografia f : fotografie) {
-			if (!downloadMethod(f)) {
+			temp_filepath = downloadMethod(f);
+			if (temp_filepath==null) {
 				model.addAttribute("erroreIO", "non riesco a scaricare il file "+f.getId()+"_"+f.getNome());
 				return "myErrorPage";
 			}
+			//files.add("/downloads_silph/"+f.getId().toString()+"_"+f.getNome()+".jpg");
+			System.out.println(temp_filepath);
+			files.add(temp_filepath);
 		}
+		model.addAttribute("files_scaricati", files);
 		return "gallery";
 	}
 }

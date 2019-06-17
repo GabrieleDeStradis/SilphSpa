@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html  xmlns:th="http://www.thymeleaf.org"
 	xmlns="http://www.w3.org/1999/html">
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/style.css" />
-<title>FotografiaPage</title>
+<title>ShowFotografiaPage</title>
 </head>
 <body>
 	<div class="topnavbar">
 		<h1 class="title"><b>Silph Spa</b></h1>
 		<br>
 		<a th:href="@{/}">Home</a>
-		<span>	</span>
+		<span>	  </span>
 		<a th:href="@{/about}">About</a>
 	</div>
 	
@@ -20,9 +20,13 @@
 	<br/>
 	
 	
-	<div><h3 class="title">Fotografia</h3></div>
-	<div th:text="'nome trovato: '+${fotografia.nome}">nome_foto</div>
-	
-	<p>TODO - IMPLEMENT</p>
+	<div><h3 class="ok_message">Fotografia trovata!</h3></div>
+	<div th:text="'Nome: '+${fotografia.nome}">foto_nome</div>
+	<div th:text="'Fotografo: '">
+		<a th:href="@{'/fotografo/'+${fotografia.fotografo.id}}" th:text="${fotografia.fotografo.nome}"></a>foto_fotografo</div>
+	<div th:text="'Album '">
+		<a th:href="@{'/album/'+${fotografia.album.id}}" th:text="${fotografia.album.nome}"></a>foto_album</div>
+	<br/>
+	<img th:src="@{${fotoPath}}" class="gallery_image">
 </body>
 </html>

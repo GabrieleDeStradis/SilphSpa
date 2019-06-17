@@ -24,6 +24,12 @@ body {
 	font-style: italic;
 }
 
+.ok_message {
+	font_family: cursive;
+	color: green;
+	font-style: bold,italic;
+}
+
 .body {
 	font-family: cursive; 
 }
@@ -40,4 +46,11 @@ body {
 }
 .searchbar button {
 	float: right;
+}
+
+.gallery_image {
+	width:30%;
+	height:30%;
+	padding-left: 350px;
+	transform: rotate(-90deg);
 }

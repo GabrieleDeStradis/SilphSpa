@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import it.uniroma3.siw.silphspa.model.Fotografia;
 import it.uniroma3.siw.silphspa.model.SearchQuery;
 import it.uniroma3.siw.silphspa.services.AlbumService;
 import it.uniroma3.siw.silphspa.services.FotografiaService;
@@ -47,14 +48,18 @@ public class MainController {
 		if (!bindingResult.hasErrors()) {
 			/* eseguo un controllo sul tipo di ricerca */
 			if (searchQuery.getType().equals("Fotografia")) { //ricerca per Fotografia
-				model.addAttribute("fotografia", this.fotografiaService.cercaPerNome(searchQuery.getQuery()));
+				Fotografia fotografia_trovata = this.fotografiaService.cercaPerNome(searchQuery.getQuery());
+				model.addAttribute("fotografia", fotografia_trovata);
+				model.addAttribute("fotoPath", FotografiaController.downloadMethod(fotografia_trovata));
 				nextPage = "fotografia";
 			}
 			else if (searchQuery.getType().equals("Album")) { //ricerca per Album
+				//TODO
 				model.addAttribute("album", this.albumService.cercaPerNome(searchQuery.getQuery()));
 				nextPage = "album";
 			}
 			else { //ricerca per Fotografo
+				//TODO
 				model.addAttribute("fotografo",this.fotografoService.cercaPerNome(searchQuery.getQuery()));
 				nextPage = "fotografo";
 			}

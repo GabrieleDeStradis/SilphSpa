@@ -3,10 +3,18 @@
 	xmlns="http://www.w3.org/1999/html">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/css/style.css" />
 <title>Gallery Fotografie</title>
 </head>
 <body>
-	<h1>Fotografie della Silph Spa</h1>
-	<div>TODO - IMPLEMENT</div>
+	<div class="title"><h1>Fotografie della Silph Spa</h1></div>
+	<br/>
+	<br/>
+	
+	<ul>
+		<li th:each="fotoPath : ${files_scaricati}">
+			<img th:src="@{${fotoPath}}" class="gallery_image">
+		</li>
+	</ul>
 </body>
 </html>
