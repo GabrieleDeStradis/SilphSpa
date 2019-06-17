@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import it.uniroma3.siw.silphspa.model.Funzionario;
 import it.uniroma3.siw.silphspa.model.SearchQuery;
 import it.uniroma3.siw.silphspa.services.AlbumService;
 import it.uniroma3.siw.silphspa.services.FotografiaService;
@@ -60,5 +61,12 @@ public class MainController {
 			}
 		}
 		return nextPage;
+	}
+	
+	@RequestMapping("/login")
+	public String login(Model model) {
+		Funzionario funzionario = new Funzionario();
+		model.addAttribute("funzionario", funzionario);
+		return "funzionarioLogin";
 	}
 }
