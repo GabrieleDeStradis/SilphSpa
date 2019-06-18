@@ -28,9 +28,7 @@ public class CarrelloController {
 	 */
 	@RequestMapping(value="/aggiungiAlCarrello",method=RequestMethod.GET)
 	public String aggiungiFotoAlCarrello(@RequestParam("fotoPath") String fotoPath, Model model) {
-		System.out.println("Il fotoPath e' -> "+fotoPath);
 		Long fotoId = extractIdFromPath(fotoPath);
-		System.out.println("L'id estratto e' -> "+fotoId.toString());
 		
 		//TODO aggiungere la logica per il carrello
 		//     (consiglio di memorizzare sia l'id che il path della foto per visualizzarla facilmente nella richiesta)
@@ -52,20 +50,17 @@ public class CarrelloController {
 	 * @return (Long) id
 	 */
 	private Long extractIdFromPath(String path) {
-		/*char[] name_file = path.substring(18).toCharArray();
-		System.out.println("name_file = "+name_file);
-		char[] final_id = "";
-		int i = 0;
+		char[] name_file = path.substring(17).toCharArray();
+		String id_string = "";
 		for (char c : name_file) {
-			if (!(c>='0'&&c<='9'))
+			if (!(c>='0' && c<='9'))
 				break;
 			else {
-				final_id.;
+				id_string = id_string.concat(Character.toString(c));
 			}
 		}
-		System.out.println("final_id is "+final_id);
-		return Long.parseLong(final_id);*/
-		return 0L;
+		System.out.println("string for id is ->"+id_string);
+		return Long.parseLong(id_string);
 	}
 	
 	@RequestMapping(value="/mostraCarrello",method=RequestMethod.GET)
