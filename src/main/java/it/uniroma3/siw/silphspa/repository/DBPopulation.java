@@ -33,7 +33,8 @@ public class DBPopulation implements ApplicationRunner{
 	@Autowired
 	private FunzionarioService funzionarioService;
 	
-	private String images_path = System.getProperty("user.dir")+"/src/main/resources/static/images/";
+	
+	
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -83,6 +84,12 @@ public class DBPopulation implements ApplicationRunner{
 		this.albumService.inserisci(album3);
 		
 		/* salvataggio fotografie */
+		String images_path = "";
+		try {
+			images_path = (new File(".").getCanonicalPath())+"/src/main/resources/static/images/";
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		String[] files = new File(images_path).list();
 		File file = null;
 		Fotografia foto = null;
