@@ -29,7 +29,7 @@
 		Album: <a th:href="@{'/album/'+${fotografia.album.id}}" th:text="${fotografia.album.nome}">foto_album</a>
 	</div>
 	<br/>
-	<span th:text="${fotoPath}"></span>
-	<img th:src="@{${fotoPath}}" class="gallery_image">
+
+	<img th:src="@{${fotoPath}}" class="single_image">
 </body>
 </html>

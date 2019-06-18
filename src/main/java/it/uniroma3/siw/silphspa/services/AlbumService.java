@@ -26,7 +26,7 @@ public class AlbumService {
 	}
 	
 	@Transactional
-	public Album albumPerId(Long id) {
+	public Album cercaPerId(Long id) {
 		return this.albumRepository.findById(id).get();
 	}
 	

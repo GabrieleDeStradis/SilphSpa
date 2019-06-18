@@ -19,7 +19,7 @@ public class AlbumController {
 
 		if (id != null) {
 
-			model.addAttribute("album", this.albumService.albumPerId(id));
+			model.addAttribute("album", this.albumService.cercaPerId(id));
 			return "album.html";
 
 		} else {

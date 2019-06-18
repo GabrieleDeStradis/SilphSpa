@@ -23,13 +23,13 @@
 	<div class="notFound_message" th:text="${notFoundMessage}"></div>
 	<div th:switch="${notFoundType}">
 		<span class="notFound_suggest" th:case="'Fotografia'">
-			Visualizza la <a th:text="gallery" th:href="${/gallery}"></a></span>
+			Visualizza la <a th:text="gallery" th:href="@{/gallery}"></a></span>
 		
 		<span class="notFound_suggest" th:case="'Fotografo'">
-			Visualizza i <a th:text="fotografi" th:href="${/fotografi}"></a></span>
+			Visualizza i <a th:text="fotografi" th:href="@{/fotografi}"></a></span>
 		
 		<span class="notFound_suggest" th:case="'Album'">
-			Visualizza gli <a th:text="album" th:href="${/albums}"></a></span>
+			Visualizza gli <a th:text="album" th:href="@{/albums}"></a></span>
 	</div>
 </body>
 </html>

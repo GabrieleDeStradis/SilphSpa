@@ -9,27 +9,22 @@
 <body>
 	<div class="title">
 		<h1>Fotografie della Silph Spa</h1>
-		<a th:href="@{/shoppingCart}"> <img src="/icons/cart.png"
-			class="carrello_image"></a>
+		<a class="carrello_image" th:href="@{/shoppingCart}"><img src="/icons/cart.png" alt="carrello immagine"></a>
 	</div>
-	<div style="padding-left: 350px">
-		<i>seleziona le foto che vorresti utilizzare</i>
-	</div>
-	<div style="padding-left: 350px">
-		<i>da gestire ancora la posizione del bottone</i>
+	<div style="padding-left: 300px">
+		<i>seleziona le foto che vorresti utilizzare cliccando sul bottone a lato immagine</i>
 	</div>
 	<br />
 	<br />
 
 	<div th:each="fotoPath : ${files_galleria}">
-		<img th:src="@{${fotoPath}}" class="gallery_image">
+		<img class="gallery_image" th:src="@{${fotoPath}}">
 
-		<form style="position: inherit;" th:action="@{shoppingCart/aggiungiAlCarrelloDallaGallery}">
-			<!-- style="display: none;" -->
-			<input style="display: none;" type="text" th:value="${fotoPath}"
-				name="fotoPath">
+		<form style="float: left; padding-top: 40px; padding-left: 60px;" 
+		  th:action="@{shoppingCart/aggiungiAlCarrelloDallaGallery}">
+			<input style="display: none;" type="text" th:value="${fotoPath}" name="fotoPath">
 			<button type="submit">
-				<img src="/icons/addToCart.png" class="addToCarrello_image">
+				<img class="addToCarrello_image" src="/icons/addToCart.png" alt="aggiungi immagine">
 			</button>
 		</form>
 	</div>

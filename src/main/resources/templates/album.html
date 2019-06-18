@@ -27,12 +27,12 @@
 			<td th:text="*{nome}">nome_album</td>
 		</tr>
 		<tr>
-			<td>Data registrazione: </td>
-			<td th:text="${#temporals.formatISO(*{dataRegistrazione})}">data_album</td>
+			<td>Registrazione: </td>
+			<td th:text="${#temporals.format(album.dataRegistrazione, 'dd-MM-yyyy')}">data_album</td>
 		</tr>
 		<tr>
 			<td>
-				<a th:href="@{'/fotografieAlbum/'+*{id}}" th:text="Fotografie">fotografie_album</a>
+				<a th:href="@{'/fotografieDaAlbum/'+*{id}}" th:text="Fotografie">fotografie_album</a>
 			</td>
 		</tr>
 	</table>

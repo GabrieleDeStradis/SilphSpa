@@ -10,19 +10,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import it.uniroma3.siw.silphspa.model.Album;
 import it.uniroma3.siw.silphspa.model.Fotografia;
+import it.uniroma3.siw.silphspa.services.AlbumService;
 import it.uniroma3.siw.silphspa.services.FotografiaService;
 
 @Controller
 public class FotografiaController {
 
 	@Autowired
-	private FotografiaService fotoService;
+	private FotografiaService fotografiaService;
+	@Autowired
+	private AlbumService albumService;
 
 	/* path della directory per la gestione della galleria di immagini */
 	/*System.getProperty("user.dir")+"/src/main/resources/static/*/
@@ -41,7 +46,7 @@ public class FotografiaController {
 			@ModelAttribute("fotografia")Fotografia foto, Model model) {
 		try {
 			foto.setImmagine(file.getBytes());
-			Fotografia savedFoto = this.fotoService.inserisci(foto);
+			Fotografia savedFoto = this.fotografiaService.inserisci(foto);
 			model.addAttribute("foto", savedFoto);
 			if (downloadMethod(savedFoto)!=null)
 				return "fotografiaSalvata";
@@ -79,46 +84,6 @@ public class FotografiaController {
 			return ("/downloads_silph/"+file_name);
 	}
 	
-	/**
-	 * Questo metodo resetta la directory che gestisce la gallery e tutto il suo contenuto 
-	 * - metodo ricorsivo e con una logica di debug molto basilare
-	 * @param path - il percorso alla directory destinata
-	 * @return true se la cancellazione e' andata a buon fine, false altrimenti
-	 */
-	/*private static boolean deleteDirectory(File path) {
-		if (path.exists()) {
-			File[] files = path.listFiles();
-			for( File f : files ) {
-				if (f.isDirectory()) {
-					if (!deleteDirectory(f)) {
-						System.out.println("chiamata ricorsiva fallita");
-						return false;
-					}
-				} else {
-					if (!f.delete()) {
-						try {
-							System.out.println("eliminazione file _"+f.getCanonicalPath()+"_ non riuscita");
-						} catch (IOException e) {
-							System.out.println("errore I/O, leggi stack sotto");
-							e.printStackTrace();
-						}
-						return false;
-					}
-				}
-			}
-			return path.delete();
-		}
-		else {
-			try {
-				System.out.println("non esiste il path _"+path.getCanonicalPath()+"_ da cancellare");
-			} catch (IOException e) {
-				System.out.println("errore I/O, leggi stack sotto");
-				e.printStackTrace();
-			}
-			return false;
-		}
-	}*/
-	
 	@RequestMapping(value="/addFotografia", method=RequestMethod.GET)
 	public String aggiungiFotografia(Model model) {
 		model.addAttribute("fotografia", new Fotografia());
@@ -133,23 +98,7 @@ public class FotografiaController {
 	@RequestMapping(value="/gallery", method=RequestMethod.GET)
 	public String visualizzaGalleriaFotografie(Model model) {
 		/* recupero tutti gli oggetti Fotografia salvati nel db */
-		List<Fotografia> fotografie = this.fotoService.tutte();
-		/* creo la directory per le immagini da visualizzare */
-		/*File file = new File(download_path);
-		if (!deleteDirectory(file)) { //cancello la cartella e tutto il suo contenuto se esistono
-			model.addAttribute("erroreIO", "non riesco ad eliminare la cartella"+download_path);
-			return "myErrorPage";
-		}
-		if (!file.mkdir()) { //ricreo la cartella vuota
-			try {
-				model.addAttribute("erroreIO", "non riesco a creare la cartella"+file.getCanonicalPath());
-			} catch (IOException e) {
-				System.out.println("errore I/O, leggi stack sotto");
-				e.printStackTrace();
-			}
-			return "myErrorPage";
-		}
-		/* riempio la directory creando i relativi file .jpg
+		List<Fotografia> fotografie = this.fotografiaService.tutte();/* riempio la directory creando i relativi file .jpg
 		 * inoltre creo una lista con tutti i percorsi relativi ai files creati */
 		List<String> files_galleria = new LinkedList<>();
 		String temp_filepath = "";
@@ -163,6 +112,15 @@ public class FotografiaController {
 		}
 		model.addAttribute("files_galleria", files_galleria);
 		return "gallery";
+	}
+	
+	@RequestMapping(value="/fotografieDaAlbum/{id_album}",method=RequestMethod.GET)
+	public String visualizzFotografieAlbum(@PathVariable("id_album") Long id_album, Model model) {
+		Album album = this.albumService.cercaPerId(id_album);
+		model.addAttribute("fotografie",this.fotografiaService.cercaPerAlbum(album));
+		model.addAttribute("album",album);
+		
+		return "fotografieAlbum";
 	}
 	
 }

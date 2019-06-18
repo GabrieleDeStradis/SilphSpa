@@ -1,20 +1,26 @@
 @charset "UTF-8";
 
-body {
-	background-image: url("src/main/resources/images/homePageImage.jpg");
-}
+/*body {
+	background-image: url("/css/homePageImage.jpg");
+}*/
 
 .topnavbar {
-	background-color: lime;
+	background-color: gray;
 }
 .topnavbar h1 {
+	font-family: cursive;
 	float: center;
+	color: orange;
+	font-size: large;
+	font-style: bold;
 }
 
 .title {
-	font-family: fantasy;
+	font-family: cursive;
 	text-align: center;
-	color: green;
+	color: orange;
+	font-size: x-large;
+	font-style: bold;
 }
 
 .invalid_message {
@@ -63,12 +69,22 @@ body {
 .gallery_image {
 	width:30%;
 	height:30%;
-	padding-left: 350px;
+	padding-left: 200px;
+}
+
+.single_image {
+	width: 40%;
+	height: 40%;
+	padding-left: 200px;
 }
 
 .addToCarrello_image {
+	float: right;
+	width: 70%;
+	height: 70%;
 }
 
 .carrello_image {
 	float: right;
+	padding-right: 50px;
 }
