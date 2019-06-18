@@ -22,9 +22,9 @@
 	
 	<div><h3 class="ok_message">Fotografia trovata!</h3></div>
 	<div th:text="'Nome: '+${fotografia.nome}">foto_nome</div>
-	<div th:text="'Fotografo: '">
+	<div th:text="'Fotografo: STILL DOESN'T WORK'">
 		<a th:href="@{'/fotografo/'+${fotografia.fotografo.id}}" th:text="${fotografia.fotografo.nome}"></a>foto_fotografo</div>
-	<div th:text="'Album '">
+	<div th:text="'Album STILL DOESN'T WORK'">
 		<a th:href="@{'/album/'+${fotografia.album.id}}" th:text="${fotografia.album.nome}"></a>foto_album</div>
 	<br/>
 	<img th:src="@{${fotoPath}}" class="gallery_image">

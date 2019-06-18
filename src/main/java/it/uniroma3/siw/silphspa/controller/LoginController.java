@@ -1,7 +1,5 @@
 package it.uniroma3.siw.silphspa.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import it.uniroma3.siw.silphspa.model.Funzionario;
-import it.uniroma3.siw.silphspa.repository.FunzionarioRepository;
 import it.uniroma3.siw.silphspa.services.FunzionarioService;
 import it.uniroma3.siw.silphspa.services.FunzionarioValidator;
 

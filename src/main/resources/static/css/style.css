@@ -52,5 +52,11 @@ body {
 	width:30%;
 	height:30%;
 	padding-left: 350px;
-	transform: rotate(-90deg);
+}
+
+.addToCarrello_image {
+}
+
+.carrello_image {
+	float: right;
 }

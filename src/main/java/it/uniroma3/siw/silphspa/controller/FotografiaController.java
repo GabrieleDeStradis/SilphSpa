@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.silphspa.model.Fotografia;
-import it.uniroma3.siw.silphspa.model.Fotografo;
 import it.uniroma3.siw.silphspa.services.FotografiaService;
 
 @Controller
@@ -26,7 +25,7 @@ public class FotografiaController {
 	private FotografiaService fotoService;
 
 	/* path della directory per la gestione della galleria di immagini */
-	private static String download_path = System.getProperty("user.dir")+"/src/main/resources/static/downloads_silph/";
+	protected static String download_path = System.getProperty("user.dir")+"/src/main/resources/static/downloads_silph/";
 	
 	/**
 	 * Questo metodo gestisce il caricamento sul database di un oggetto fotografia 
@@ -104,7 +103,7 @@ public class FotografiaController {
 	 * @return la prossima vista
 	 */
 	@RequestMapping(value="/gallery", method=RequestMethod.GET)
-	public String visualizzaFotografie(Model model) {
+	public String visualizzaGalleriaFotografie(Model model) {
 		/* recupero tutti gli oggetti Fotografia salvati nel db */
 		List<Fotografia> fotografie = this.fotoService.tutte();
 		/* creo la directory per le immagini da visualizzare */
@@ -127,11 +126,9 @@ public class FotografiaController {
 				model.addAttribute("erroreIO", "non riesco a scaricare il file "+f.getId()+"_"+f.getNome());
 				return "myErrorPage";
 			}
-			//files.add("/downloads_silph/"+f.getId().toString()+"_"+f.getNome()+".jpg");
-			System.out.println(temp_filepath);
 			files.add(temp_filepath);
 		}
-		model.addAttribute("files_scaricati", files);
+		model.addAttribute("files_galleria", files);
 		return "gallery";
 	}
 	
