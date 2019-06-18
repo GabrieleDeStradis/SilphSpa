@@ -110,11 +110,11 @@ public class FotografiaController {
 		/* creo la directory per le immagini da visualizzare */
 		File file = new File(download_path);
 		if (!deleteDirectory(file)) { //cancello la cartella e tutto il suo contenuto se esistono
-			model.addAttribute("erroreIO", "non riesco ad eliminare la cartella downloads_silph");
+			model.addAttribute("erroreIO", "non riesco ad eliminare la cartella"+download_path);
 			return "myErrorPage";
 		}
 		if (!file.mkdir()) { //ricreo la cartella vuota
-			model.addAttribute("erroreIO", "non riesco a creare la cartella downloads_silph");
+			model.addAttribute("erroreIO", "non riesco a creare la cartella"+download_path);
 			return "myErrorPage";
 		}
 		/* riempio la directory creando i relativi file .jpg
