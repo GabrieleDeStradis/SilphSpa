@@ -25,7 +25,8 @@ public class FotografiaController {
 	private FotografiaService fotoService;
 
 	/* path della directory per la gestione della galleria di immagini */
-	protected static String download_path = System.getProperty("user.dir")+"/src/main/resources/static/downloads_silph/";
+	/*System.getProperty("user.dir")+"/src/main/resources/static/*/
+	protected static String download_path = "/downloads_silph/";
 	
 	/**
 	 * Questo metodo gestisce il caricamento sul database di un oggetto fotografia 

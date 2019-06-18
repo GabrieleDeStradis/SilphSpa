@@ -52,7 +52,19 @@ public class CarrelloController {
 	 * @return (Long) id
 	 */
 	private Long extractIdFromPath(String path) {
-		//TODO
+		/*char[] name_file = path.substring(18).toCharArray();
+		System.out.println("name_file = "+name_file);
+		char[] final_id = "";
+		int i = 0;
+		for (char c : name_file) {
+			if (!(c>='0'&&c<='9'))
+				break;
+			else {
+				final_id.;
+			}
+		}
+		System.out.println("final_id is "+final_id);
+		return Long.parseLong(final_id);*/
 		return 0L;
 	}
 	
