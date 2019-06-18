@@ -1,29 +1,40 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org"
 	xmlns="http://www.w3.org/1999/html">
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/style.css" />
 <title>Gallery Fotografie</title>
+<ul>
+	<li><a th:href="@{/shoppingCart}">Carrello</a></li>
+</ul>
 </head>
 <body>
 	<div class="title">
 		<h1>Fotografie della Silph Spa</h1>
-		<a th:href="@{/mostraCarrello}">
-			<img src="/icons/cart.png" class="carrello_image"></a>
+		<a th:href="@{/mostraCarrello}"> <img src="/icons/cart.png"
+			class="carrello_image"></a>
 	</div>
-	<div style="padding-left: 350px"><i>seleziona le foto che vorresti utilizzare</i></div>
-	<div style="padding-left: 350px"><i>da gestire ancora la posizione del bottone</i></div>
-	<br/>
-	<br/>
-	
+	<div style="padding-left: 350px">
+		<i>seleziona le foto che vorresti utilizzare</i>
+	</div>
+	<div style="padding-left: 350px">
+		<i>da gestire ancora la posizione del bottone</i>
+	</div>
+	<br />
+	<br />
+
 	<div th:each="fotoPath : ${files_galleria}">
 		<img th:src="@{${fotoPath}}" class="gallery_image">
-		
+
 		<form style="position: inherit;" th:action="@{/aggiungiAlCarrello}">
 			<!-- style="display: none;" -->
-			<input style="display: none;" type="text" th:value="${fotoPath}" name="fotoPath">
-			<button type="submit"><img src="/icons/addToCart.png" class="addToCarrello_image"></button></form>
+			<input style="display: none;" type="text" th:value="${fotoPath}"
+				name="fotoPath">
+			<button type="submit">
+				<img src="/icons/addToCart.png" class="addToCarrello_image">
+			</button>
+		</form>
 	</div>
 </body>
 </html>
