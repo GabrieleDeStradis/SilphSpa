@@ -16,11 +16,11 @@ import java.util.List;
 @Service
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Transactional
-public class ShoppingCartServiceImpl implements ShoppingCartService {
+public class ShoppingCartServiceImpl implements ShoppingCartService{
 
 	private final FotografiaService fotografiaService;
 
-	private List<Fotografia> fotografie = new ArrayList<>();
+	private List<String> fotografie = new ArrayList<>();
 
 	@Autowired
 	public ShoppingCartServiceImpl(FotografiaService fotografiaService) {
@@ -28,13 +28,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
-	public void aggiungiFotografia(Fotografia fotografia) {
+	public void aggiungiFotografia(String fotografia) {
 		fotografie.add(fotografia);
 	}
 
 	
 	@Override
-	public void rimuoviFotografia(Fotografia fotografia) {
+	public void rimuoviFotografia(String fotografia) {
 		if (fotografie.contains(fotografia)) {
 			
 			this.fotografie.remove(fotografia);
@@ -48,7 +48,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 
 	@Override
-	public List<Fotografia> getFotografieNelCarrello() {
+	public List<String> getFotografieNelCarrello() {
 		return Collections.unmodifiableList(fotografie);
 	}
 	

@@ -10,16 +10,17 @@ import org.springframework.web.servlet.ModelAndView;
 import it.uniroma3.siw.silphspa.model.Fotografia;
 import it.uniroma3.siw.silphspa.services.FotografiaService;
 import it.uniroma3.siw.silphspa.services.ShoppingCartService;
+import it.uniroma3.siw.silphspa.services.ShoppingCartServiceImpl;
 
 @Controller
 public class ShoppingCartController {
 
-	private final ShoppingCartService shoppingCartService;
+	private final ShoppingCartServiceImpl shoppingCartService;
 
 	private final FotografiaService fotografiaService;
 
 	@Autowired
-	public ShoppingCartController(ShoppingCartService shoppingCartService, FotografiaService fotografiaService) {
+	public ShoppingCartController(ShoppingCartServiceImpl shoppingCartService, FotografiaService fotografiaService) {
 		this.shoppingCartService = shoppingCartService;
 		this.fotografiaService = fotografiaService;
 	}
@@ -35,8 +36,8 @@ public class ShoppingCartController {
 	@GetMapping("/shoppingCart/addFotografia/{fotografiaId}")
 	public ModelAndView aggiungiFotografiaAlCarrello(@PathVariable("fotoId") Long fotoId) {
 		if (!this.shoppingCartService.getFotografieNelCarrello().contains(this.fotografiaService.
-				cercaPerId(fotoId))) {
-			this.shoppingCartService.aggiungiFotografia(this.fotografiaService.cercaPerId(fotoId));
+				cercaPerId(fotoId).getNome())) {
+			this.shoppingCartService.aggiungiFotografia(this.fotografiaService.cercaPerId(fotoId).getNome());
 		}
 		return shoppingCart();
 	}
@@ -44,7 +45,7 @@ public class ShoppingCartController {
 	@GetMapping(value="/shoppingCart/aggiungiAlCarrelloDallaGallery")
 	public ModelAndView aggiungiFotoAlCarrello(@RequestParam("fotoPath") String fotoPath) {
 		/* stessa logica del metodo aggiungiFotografiaAlCarrello(...) ma usa il path della foto */
-		Fotografia foto = this.fotografiaService.cercaPerId(extractIdFromPath(fotoPath));
+		String foto = this.fotografiaService.cercaPerId(extractIdFromPath(fotoPath)).getNome();
 		if (!this.shoppingCartService.getFotografieNelCarrello().contains(foto)) {
 			this.shoppingCartService.aggiungiFotografia(foto);
 		}
@@ -54,8 +55,8 @@ public class ShoppingCartController {
 	@GetMapping("/shoppingCart/removeProduct/{productId}")
 	public ModelAndView rimuoviFotografiaDalCarrello(@PathVariable("fotografiaId") Long fotoId) {
 		if (this.shoppingCartService.getFotografieNelCarrello().contains(this.fotografiaService.
-				cercaPerId(fotoId))) {
-			this.shoppingCartService.rimuoviFotografia(this.fotografiaService.cercaPerId(fotoId));
+				cercaPerId(fotoId).getNome())) {
+			this.shoppingCartService.rimuoviFotografia(this.fotografiaService.cercaPerId(fotoId).getNome());
 		}
 			return shoppingCart();
 	}

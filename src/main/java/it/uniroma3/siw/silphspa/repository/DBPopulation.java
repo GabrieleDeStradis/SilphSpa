@@ -84,12 +84,7 @@ public class DBPopulation implements ApplicationRunner{
 		this.albumService.inserisci(album3);
 		
 		/* salvataggio fotografie */
-		String images_path = "";
-		try {
-			images_path = (new File(".").getCanonicalPath())+"/src/main/resources/static/images/";
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		String images_path = it.uniroma3.siw.silphspa.SilphSpaApplication.application_pathToStaticFolder+"/images/";
 		String[] files = new File(images_path).list();
 		File file = null;
 		Fotografia foto = null;
