@@ -73,6 +73,7 @@ public class ShoppingCartController {
 	 * @return (Long) id
 	 */
 	private Long extractIdFromPath(String path) {
+		System.out.println("PASSED PATH IS\n"+path);
 		char[] name_file = path.substring(17).toCharArray();
 		String id_string = "";
 		for (char c : name_file) {

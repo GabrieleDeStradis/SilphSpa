@@ -26,7 +26,8 @@ public class FotografiaController {
 
 	/* path della directory per la gestione della galleria di immagini */
 	/*System.getProperty("user.dir")+"/src/main/resources/static/*/
-	protected static String download_path = "/downloads_silph/";
+	protected static String download_path = 
+			it.uniroma3.siw.silphspa.SilphSpaApplication.application_pathToStaticFolder+"/downloads_silph/";
 	
 	/**
 	 * Questo metodo gestisce il caricamento sul database di un oggetto fotografia 
@@ -61,36 +62,62 @@ public class FotografiaController {
 	 * @return la stringa al percorso da usare nelle pagine html, null altrimenti
 	 */
 	protected static String downloadMethod(Fotografia foto) {
-		String file_name = foto.getId().toString()+"_"+foto.getNome()+".jpg";
+		String file_name = foto.getId().toString()+"_"+foto.getNome();
 		File file = new File(download_path+file_name);
-		try {
-			FileOutputStream fos = new FileOutputStream(file);
-			fos.write(foto.getImmagine());
-			fos.close();
-			return "/downloads_silph/"+file_name;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
+		if (!file.exists()) { //se il file immagine non esiste lo creo
+			try {
+				FileOutputStream fos = new FileOutputStream(file);
+				fos.write(foto.getImmagine());
+				fos.close();
+				return "/downloads_silph/"+file_name;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
 		}
+		else //altrimenti ritorno il path al file gia' esistente
+			return ("/downloads_silph/"+file_name);
 	}
 	
 	/**
-	 * Questo metodo resetta la directory che gestisce la gallery e tutto il suo contenuto (recursive)
+	 * Questo metodo resetta la directory che gestisce la gallery e tutto il suo contenuto 
+	 * - metodo ricorsivo e con una logica di debug molto basilare
 	 * @param path - il percorso alla directory destinata
 	 * @return true se la cancellazione e' andata a buon fine, false altrimenti
 	 */
-	private static boolean deleteDirectory(File path) {
-		if (path.exists() ) {
+	/*private static boolean deleteDirectory(File path) {
+		if (path.exists()) {
 			File[] files = path.listFiles();
-			for( File f : files) {
-				if (f.isDirectory())
-					deleteDirectory(f);
-				else
-					f.delete();
+			for( File f : files ) {
+				if (f.isDirectory()) {
+					if (!deleteDirectory(f)) {
+						System.out.println("chiamata ricorsiva fallita");
+						return false;
+					}
+				} else {
+					if (!f.delete()) {
+						try {
+							System.out.println("eliminazione file _"+f.getCanonicalPath()+"_ non riuscita");
+						} catch (IOException e) {
+							System.out.println("errore I/O, leggi stack sotto");
+							e.printStackTrace();
+						}
+						return false;
+					}
+				}
 			}
+			return path.delete();
 		}
-		return path.delete();
-	}
+		else {
+			try {
+				System.out.println("non esiste il path _"+path.getCanonicalPath()+"_ da cancellare");
+			} catch (IOException e) {
+				System.out.println("errore I/O, leggi stack sotto");
+				e.printStackTrace();
+			}
+			return false;
+		}
+	}*/
 	
 	@RequestMapping(value="/addFotografia", method=RequestMethod.GET)
 	public String aggiungiFotografia(Model model) {
@@ -108,28 +135,33 @@ public class FotografiaController {
 		/* recupero tutti gli oggetti Fotografia salvati nel db */
 		List<Fotografia> fotografie = this.fotoService.tutte();
 		/* creo la directory per le immagini da visualizzare */
-		File file = new File(download_path);
+		/*File file = new File(download_path);
 		if (!deleteDirectory(file)) { //cancello la cartella e tutto il suo contenuto se esistono
 			model.addAttribute("erroreIO", "non riesco ad eliminare la cartella"+download_path);
 			return "myErrorPage";
 		}
 		if (!file.mkdir()) { //ricreo la cartella vuota
-			model.addAttribute("erroreIO", "non riesco a creare la cartella"+download_path);
+			try {
+				model.addAttribute("erroreIO", "non riesco a creare la cartella"+file.getCanonicalPath());
+			} catch (IOException e) {
+				System.out.println("errore I/O, leggi stack sotto");
+				e.printStackTrace();
+			}
 			return "myErrorPage";
 		}
 		/* riempio la directory creando i relativi file .jpg
 		 * inoltre creo una lista con tutti i percorsi relativi ai files creati */
-		List<String> files = new LinkedList<>();
-		String temp_filepath = null;
+		List<String> files_galleria = new LinkedList<>();
+		String temp_filepath = "";
 		for (Fotografia f : fotografie) {
 			temp_filepath = downloadMethod(f);
 			if (temp_filepath==null) {
 				model.addAttribute("erroreIO", "non riesco a scaricare il file "+f.getId()+"_"+f.getNome());
 				return "myErrorPage";
 			}
-			files.add(temp_filepath);
+			files_galleria.add(temp_filepath);
 		}
-		model.addAttribute("files_galleria", files);
+		model.addAttribute("files_galleria", files_galleria);
 		return "gallery";
 	}
 	

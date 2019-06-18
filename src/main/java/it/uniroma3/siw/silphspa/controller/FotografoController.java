@@ -42,15 +42,16 @@ public class FotografoController {
 			return "fotografo.html";
 			
 		}else {
-			
-			model.addAttribute("fotografi", this.fotografoService.tutti());
-			return "fotografi.html";
-			
+			return getFotografi(model);
 		}
 		
 	}
 	
-	
+	@RequestMapping(value="/fotografi", method=RequestMethod.GET)
+	public String getFotografi(Model model) {
+		model.addAttribute("fotografi", this.fotografoService.tutti());
+		return "fotografi";
+	}
 	
 	@RequestMapping(value = "/fotografo", method = RequestMethod.POST)
 	public String newFotografo(@Valid @ModelAttribute("fotografo") Fotografo fotografo, Model model,

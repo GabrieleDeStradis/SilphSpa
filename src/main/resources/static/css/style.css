@@ -25,9 +25,21 @@ body {
 }
 
 .ok_message {
-	font_family: cursive;
+	font-family: cursive;
 	color: green;
 	font-style: bold,italic;
+}
+
+.notFound_message {
+	font-family: cursive;
+	color: green;
+	font-style: italic;
+}
+
+.notFound_suggest {
+	font-family: cursive;
+	color: blue;
+	font-style: italic;
 }
 
 .body {

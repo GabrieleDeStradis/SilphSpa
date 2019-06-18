@@ -22,11 +22,14 @@
 	
 	<div><h3 class="ok_message">Fotografia trovata!</h3></div>
 	<div th:text="'Nome: '+${fotografia.nome}">foto_nome</div>
-	<div th:text="'Fotografo: STILL DOESN'T WORK'">
-		<a th:href="@{'/fotografo/'+${fotografia.fotografo.id}}" th:text="${fotografia.fotografo.nome}"></a>foto_fotografo</div>
-	<div th:text="'Album STILL DOESN'T WORK'">
-		<a th:href="@{'/album/'+${fotografia.album.id}}" th:text="${fotografia.album.nome}"></a>foto_album</div>
+	<div>
+		Fotografo: <a th:href="@{'/fotografo/'+${fotografia.fotografo.id}}" th:text="${fotografia.fotografo.nome}">foto_fotografo</a>
+	</div>
+	<div>
+		Album: <a th:href="@{'/album/'+${fotografia.album.id}}" th:text="${fotografia.album.nome}">foto_album</a>
+	</div>
 	<br/>
+	<span th:text="${fotoPath}"></span>
 	<img th:src="@{${fotoPath}}" class="gallery_image">
 </body>
 </html>

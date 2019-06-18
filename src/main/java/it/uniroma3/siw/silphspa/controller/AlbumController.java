@@ -23,12 +23,14 @@ public class AlbumController {
 			return "album.html";
 
 		} else {
-
-			model.addAttribute("albums", this.albumService.tutti());
-			return "albums.html";
-
+			return getAlbums(model);
 		}
-
+	}
+	
+	@RequestMapping(value = "/albums", method = RequestMethod.GET)
+	public String getAlbums(Model model) {
+		model.addAttribute("albums", this.albumService.tutti());
+		return "albums";
 	}
 
 }

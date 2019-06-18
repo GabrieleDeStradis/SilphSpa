@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import it.uniroma3.siw.silphspa.model.Album;
 import it.uniroma3.siw.silphspa.model.Fotografia;
+import it.uniroma3.siw.silphspa.model.Fotografo;
 import it.uniroma3.siw.silphspa.model.Funzionario;
 import it.uniroma3.siw.silphspa.model.SearchQuery;
 import it.uniroma3.siw.silphspa.services.AlbumService;
@@ -49,20 +51,41 @@ public class MainController {
 		if (!bindingResult.hasErrors()) {
 			/* eseguo un controllo sul tipo di ricerca */
 			if (searchQuery.getType().equals("Fotografia")) { //ricerca per Fotografia
-				Fotografia fotografia_trovata = this.fotografiaService.cercaPerNome(searchQuery.getQuery());
-				model.addAttribute("fotografia", fotografia_trovata);
-				model.addAttribute("fotoPath", FotografiaController.downloadMethod(fotografia_trovata));
-				nextPage = "fotografia";
+				Fotografia fotografia_trovata = this.fotografiaService.cercaPerNome(searchQuery.getQuery()+".jpg");
+				if (fotografia_trovata==null) {
+					model.addAttribute("notFoundMessage","Non sono riuscito a trovare la fotografia richiesta");
+					model.addAttribute("notFoundType","Fotografia");
+					return "notFoundPage";
+				}
+				else {
+					model.addAttribute("fotografia", fotografia_trovata);
+					model.addAttribute("fotoPath", FotografiaController.downloadMethod(fotografia_trovata));
+					nextPage = "fotografia";
+				}
 			}
 			else if (searchQuery.getType().equals("Album")) { //ricerca per Album
-				//TODO
-				model.addAttribute("album", this.albumService.cercaPerNome(searchQuery.getQuery()));
-				nextPage = "album";
+				Album album_trovato = this.albumService.cercaPerNome(searchQuery.getQuery());
+				if (album_trovato==null) {
+					model.addAttribute("notFoundMessage","Non sono riuscito a trovare l'album richiesto");
+					model.addAttribute("notFoundType","Album");
+					return "notFoundPage";
+				}
+				else {
+					model.addAttribute("album", album_trovato);
+					nextPage = "album";
+				}
 			}
 			else { //ricerca per Fotografo
-				//TODO
-				model.addAttribute("fotografo",this.fotografoService.cercaPerNome(searchQuery.getQuery()));
-				nextPage = "fotografo";
+				Fotografo fotografo_trovato = this.fotografoService.cercaPerNome(searchQuery.getQuery());
+				if (fotografo_trovato==null) {
+					model.addAttribute("notFoundMessage","Non sono riuscito a trovare il fotografo richiesto");
+					model.addAttribute("notFoundType","Fotografo");
+					return "notFoundPage";
+				}
+				else {
+					model.addAttribute("fotografo", fotografo_trovato);
+					nextPage = "fotografo";
+				}
 			}
 		}
 		return nextPage;

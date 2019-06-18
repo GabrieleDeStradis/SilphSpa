@@ -7,6 +7,7 @@
 </head>
 <body>
 	<h3>Seleziona la foto per salvarla nel db</h3>
+	<h4>BISOGNA COMPLETARE LA FORM</h4>
 	<form th:action="@{/upload}" enctype="multipart/form-data" th:object="${fotografia}" method="post">
 		Nome: <input type="text" th:field="*{nome}" required>
 		<br/>
