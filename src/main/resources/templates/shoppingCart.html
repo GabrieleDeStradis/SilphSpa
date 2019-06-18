@@ -6,6 +6,10 @@
 <title>Carrello</title>
 </head>
 <body>
+	<div>
+		Torna alla <a th:href="@{/gallery}" th:text="Gallery"></a>
+	</div>
+	<br/>
 
 	<div  th:each="fotografia : ${fotografie}">
 		<div class="panel-heading">

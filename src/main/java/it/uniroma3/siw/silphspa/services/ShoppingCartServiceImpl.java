@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import it.uniroma3.siw.silphspa.model.Fotografia;
-import it.uniroma3.siw.silphspa.repository.FotografiaRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,13 +18,13 @@ import java.util.List;
 @Transactional
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
-	private final FotografiaRepository fotografiaRepository;
+	private final FotografiaService fotografiaService;
 
 	private List<Fotografia> fotografie = new ArrayList<>();
 
 	@Autowired
-	public ShoppingCartServiceImpl(FotografiaRepository fotografiaRepository) {
-		this.fotografiaRepository = fotografiaRepository;
+	public ShoppingCartServiceImpl(FotografiaService fotografiaService) {
+		this.fotografiaService = fotografiaService;
 	}
 
 	@Override
@@ -51,7 +50,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	@Override
 	public List<Fotografia> getFotografieNelCarrello() {
 		return Collections.unmodifiableList(fotografie);
-		}
+	}
 	
-
+	
 }
