@@ -20,7 +20,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 
 	private final FotografiaService fotografiaService;
 
-	private List<String> fotografie = new ArrayList<>();
+	private List<Fotografia> fotografie = new ArrayList<>();
 
 	@Autowired
 	public ShoppingCartServiceImpl(FotografiaService fotografiaService) {
@@ -28,13 +28,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 	}
 
 	@Override
-	public void aggiungiFotografia(String fotografia) {
+	public void aggiungiFotografia(Fotografia fotografia) {
 		fotografie.add(fotografia);
 	}
 
 	
 	@Override
-	public void rimuoviFotografia(String fotografia) {
+	public void rimuoviFotografia(Fotografia fotografia) {
 		if (fotografie.contains(fotografia)) {
 			
 			this.fotografie.remove(fotografia);
@@ -48,7 +48,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 
 
 	@Override
-	public List<String> getFotografieNelCarrello() {
+	public List<Fotografia> getFotografieNelCarrello() {
 		return Collections.unmodifiableList(fotografie);
 	}
 	

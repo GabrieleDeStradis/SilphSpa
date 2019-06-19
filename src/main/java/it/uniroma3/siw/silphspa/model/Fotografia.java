@@ -77,6 +77,17 @@ public class Fotografia {
 		this.immagine = file;
 	}
 	
+	@Override
+	public int hashCode() {
+		return this.getNome().hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Fotografia f = (Fotografia) obj;
+		return this.getId().equals(f.getId());
+	}
+	
 	
 
 }

@@ -9,20 +9,19 @@
 	<div>
 		Torna alla <a th:href="@{/gallery}" th:text="Gallery"></a>
 	</div>
-	<br/>
+	<br />
 
-	<div  th:each="fotografia : ${fotografie}">
+	<div th:each="fotografia : ${fotografie}">
 		<div class="panel-heading">
 			<h1>
-				<!-- <a th:text="${fotografia.nome}"
-					   th:href="@{'/fotografia/' + ${fotografia.id}}">Title</a> -->
+				<a th:text="${fotografia.nome}"
+					th:href="@{'/fotografia/' + ${fotografia.id}}">Title</a>
 			</h1>
 		</div>
 		<div>
-			<!-- <a
-					th:href="@{'/shoppingCart/rimuoviFotografia/{id}'(id=${fotografia.id})}"
-				<button type="button" class="btn btn-primary" th:text="Remove">Rimuovi</button>
-			</a>  -->
+			<a th:href="@{'/shoppingCart/rimuoviFotografia/{id}'(id=${fotografia.id})}" ><button
+					type="button" class="btn btn-primary" th:text="Remove">Rimuovi</button>
+			</a>
 		</div>
 		<br></br>
 	</div>

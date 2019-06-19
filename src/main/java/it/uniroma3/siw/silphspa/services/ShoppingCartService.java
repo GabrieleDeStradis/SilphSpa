@@ -10,11 +10,11 @@ import it.uniroma3.siw.silphspa.model.Fotografia;
 
 public interface ShoppingCartService {
 
-    void aggiungiFotografia(String fotografia);
+    void aggiungiFotografia(Fotografia fotografia);
 
-    void rimuoviFotografia(String fotografia);
+    void rimuoviFotografia(Fotografia fotografia);
 
-    List<String> getFotografieNelCarrello();
+    List<Fotografia> getFotografieNelCarrello();
     
 
     
