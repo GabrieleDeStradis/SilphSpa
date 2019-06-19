@@ -12,6 +12,6 @@ public interface ShoppingCartService {
 
     List<Fotografia> getFotografieNelCarrello();
     
-
+    void azzeraCarrello();
     
 }

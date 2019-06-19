@@ -30,7 +30,7 @@ public class FotografiaController {
 
 	/* path della directory per la gestione della galleria di immagini */
 	/*System.getProperty("user.dir")+"/src/main/resources/static/*/
-	protected static String download_path = 
+	private String download_path = //was protected static
 			it.uniroma3.siw.silphspa.SilphSpaApplication.application_pathToStaticFolder+"/downloads_silph/";
 	
 	/**
@@ -45,6 +45,8 @@ public class FotografiaController {
 			@ModelAttribute("fotografia")Fotografia foto, Model model) {
 		try {
 			foto.setImmagine(file.getBytes());
+			if (!foto.getNome().contains(".jpg")) //aggiungo il tipo di file per le foto non predefinite
+				foto.setNome(foto.getNome().concat(".jpg"));
 			Fotografia savedFoto = this.fotografiaService.inserisci(foto);
 			model.addAttribute("foto", savedFoto);
 			if (downloadMethod(savedFoto)!=null)
@@ -146,6 +148,14 @@ public class FotografiaController {
 		}
 		model.addAttribute("fotografie_paths", file_paths);
 		return "fotografie";
+	}
+	
+	@RequestMapping(value="/fotografia/{id}", method=RequestMethod.GET)
+	public String visualizzaFotografia(@PathVariable("id")Long id_fotografia, Model model) {
+		Fotografia fotografia_trovata = this.fotografiaService.cercaPerId(id_fotografia);
+		model.addAttribute("fotografia", fotografia_trovata);
+		model.addAttribute("fotoPath", downloadMethod(fotografia_trovata));
+		return "fotografia";
 	}
 	
 }

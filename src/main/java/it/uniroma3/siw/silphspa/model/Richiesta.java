@@ -1,5 +1,6 @@
 package it.uniroma3.siw.silphspa.model;
 
+import java.time.LocalDate;
 import java.util.*;
 import javax.persistence.*;
 
@@ -10,13 +11,15 @@ public class Richiesta {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String descrizione;
+	private LocalDate dataInserimento;
 	@ManyToMany
 	private List<Fotografia> foto;
 	@ManyToOne
 	private Utente utente;
 	
-	private Richiesta() {
-		
+	public Richiesta() {
+		foto = new LinkedList<>();
+		dataInserimento = LocalDate.now();
 	}
 
 	public Long getId() {
@@ -50,6 +53,18 @@ public class Richiesta {
 	public void setUtente(Utente utente) {
 		this.utente = utente;
 	}
+	
+	public LocalDate getDataInserimento() {
+		return dataInserimento;
+	}
+
+	public void setDataInserimento(LocalDate data) {
+		this.dataInserimento = data;
+	}
+	
+	public boolean addFotografia(Fotografia f) {
+		return this.foto.add(f);
+	}
 
 	@Override
 	public String toString() {
@@ -62,9 +77,30 @@ public class Richiesta {
 		
 		return descrizione.toString();
 	}
-	
-	
-	
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Richiesta other = (Richiesta) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 
 }

@@ -64,6 +64,7 @@ public class MainController {
 				else {
 					model.addAttribute("fotografia", fotografia_trovata);
 					model.addAttribute("fotoPath", fotografiaController.downloadMethod(fotografia_trovata));
+					model.addAttribute("isASearch", true);
 					nextPage = "fotografia";
 				}
 			}

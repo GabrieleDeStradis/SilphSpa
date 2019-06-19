@@ -20,7 +20,7 @@
 	<br/>
 	
 	
-	<div><h3 class="ok_message">Fotografia trovata!</h3></div>
+	<div th:if="${isASearch}"><h3 class="ok_message">Fotografia trovata!</h3></div>
 	<div th:text="'Nome: '+${fotografia.nome}">foto_nome</div>
 	<div>
 		Fotografo: <a th:href="@{'/fotografo/'+${fotografia.fotografo.id}}" th:text="${fotografia.fotografo.nome}">foto_fotografo</a>

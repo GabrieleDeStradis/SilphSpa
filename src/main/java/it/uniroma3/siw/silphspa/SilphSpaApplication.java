@@ -17,7 +17,6 @@ public class SilphSpaApplication {
 		try {
 			/* prima era System.getProperty("user.dir")+"/src/main/resources/static/ */
 			application_pathToStaticFolder = new File(".").getCanonicalPath()+"/src/main/resources/static";
-			System.out.println("PATH ALLA CARTELLA STATIC:\n"+application_pathToStaticFolder); //debug purpose
 			
 			/* cancello e ricreo la cartella classpath:/src/main/resources/static/downloads_silph/ */
 			File file = new File(application_pathToStaticFolder+"/downloads_silph/");

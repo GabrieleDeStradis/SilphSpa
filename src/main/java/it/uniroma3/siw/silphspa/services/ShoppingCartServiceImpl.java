@@ -18,14 +18,7 @@ import java.util.List;
 @Transactional
 public class ShoppingCartServiceImpl implements ShoppingCartService{
 
-	//private final FotografiaService fotografiaService;
-
 	private List<Fotografia> fotografie = new ArrayList<>();
-
-	/*@Autowired
-	public ShoppingCartServiceImpl(FotografiaService fotografiaService) {
-		this.fotografiaService = fotografiaService;
-	}*/
 
 	@Override
 	public void aggiungiFotografia(Fotografia fotografia) {
@@ -40,7 +33,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 			this.fotografie.remove(fotografia);
 			
 
-		}else {
+		} else {
 			
 			System.out.println("Fotografia non trovata!");
 			
@@ -53,5 +46,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		return Collections.unmodifiableList(fotografie);
 	}
 	
+	@Override
+	public void azzeraCarrello() {
+		this.fotografie.clear();
+	}
 	
 }

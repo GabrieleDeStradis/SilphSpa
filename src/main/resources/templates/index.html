@@ -21,26 +21,28 @@
 	<br/>
 	<br/>
 	
-	<form th:action="@{/search}" th:object="${search_query}" method="post" class="searchbar">
-		<input th:field="*{query}" type="text" placeholder="Search...">
-		<select th:field="*{type}">
-			<optgroup>
-				<option title="fotografia" value="Fotografia">Fotografia</option>
-				<option title="fotografo" value="Fotografo">Fotografo</option>
-				<option title="album" value="Album">Album</option>
-			</optgroup>
-		</select>
-		<button type="submit"><img src="/icons/search.png"></img></button>
-		
-		<br/>
-		<span class="invalid_message" th:if="${#fields.hasErrors('query')}" th:errors="*{query}"></span>
-	</form>
+	<div align="center">
+		<form th:action="@{/search}" th:object="${search_query}" method="post" class="searchbar">
+			<select th:field="*{type}">
+				<optgroup>
+					<option title="fotografia" value="Fotografia">Fotografia</option>
+					<option title="fotografo" value="Fotografo">Fotografo</option>
+					<option title="album" value="Album">Album</option>
+				</optgroup>
+			</select>
+			<input th:field="*{query}" type="text" placeholder="Search...">
+			<br/>
+			<button type="submit"><img src="/icons/search.png"></img></button>
+			
+			<br/>
+			<span class="invalid_message" th:if="${#fields.hasErrors('query')}" th:errors="*{query}"></span>
+		</form>
+	</div>
 	
 	<br/>
 	<br/>
 	<br/>
 	
 	<div>Visualizza tutte le foto e seleziona quelle che desideri accedendo alla <a th:href="@{/gallery}">gallery</a></div>
-	<div>(attenzione, la pagina risponderà lentamente)</div>
 </body>
 </html>

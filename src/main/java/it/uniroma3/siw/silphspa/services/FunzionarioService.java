@@ -18,6 +18,7 @@ public class FunzionarioService {
 		return this.funzionarioRepository.findByEmail(email);
 	}
 
+	@Transactional
 	public Funzionario inserisci(Funzionario funzionario) {
 		return this.funzionarioRepository.save(funzionario);
 	}

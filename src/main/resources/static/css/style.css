@@ -53,17 +53,7 @@
 }
 
 .searchbar {
-	float: center;
-	background-color: gray;
-}
-.searchbar input {
-	float: center;
-}
-.searchbar select {
-	float: left;
-}
-.searchbar button {
-	float: right;
+	size: 500px;
 }
 
 .gallery_image {

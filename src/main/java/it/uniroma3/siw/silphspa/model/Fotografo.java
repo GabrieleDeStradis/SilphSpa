@@ -18,7 +18,8 @@ public class Fotografo {
 	@OneToMany(mappedBy = "fotografo",
 			   cascade = CascadeType.REMOVE)
 	private List<Fotografia> foto;
-	@OneToMany(cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "fotografo", //added this mappedBy
+			   cascade = CascadeType.REMOVE)
 	private List<Album> albums;
 	
 	public Fotografo(String nome, String cognome) {

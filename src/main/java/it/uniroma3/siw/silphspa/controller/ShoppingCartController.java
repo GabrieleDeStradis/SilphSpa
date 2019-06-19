@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import it.uniroma3.siw.silphspa.model.Fotografia;
+import it.uniroma3.siw.silphspa.model.Richiesta;
+import it.uniroma3.siw.silphspa.model.Utente;
 import it.uniroma3.siw.silphspa.services.FotografiaService;
 import it.uniroma3.siw.silphspa.services.ShoppingCartServiceImpl;
 
@@ -67,8 +69,10 @@ public class ShoppingCartController {
 
 	@GetMapping("/shoppingCart/checkout")
 	public ModelAndView checkout() {
-
-		return shoppingCart();
+		ModelAndView nextModelAndView = new ModelAndView("/richiestaForm");
+		nextModelAndView.addObject("richiesta", new Richiesta());
+		nextModelAndView.addObject("utente", new Utente());
+		return nextModelAndView;
 	}
 
 	/**
