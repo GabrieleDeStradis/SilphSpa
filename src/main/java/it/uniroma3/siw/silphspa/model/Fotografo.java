@@ -80,27 +80,13 @@ public class Fotografo {
 	/* equals - hashCode - toString */
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+		return this.getNome().hashCode()+this.getCognome().hashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Fotografo other = (Fotografo) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+		Fotografo f = (Fotografo) obj;
+		return (this.getNome().equals(f.getNome()) && this.getCognome().equals(f.getCognome()));
 	}
 
 	@Override

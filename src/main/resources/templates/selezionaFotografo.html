@@ -6,8 +6,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a th:href="@{/addFotografo}">Aggiungi fotografo</a>
-<span>oppure</span>
-<h4><a href="fotografo/{id}">Elenco fotografi</a></h4>
+<ul>
+			<li th:each="fotografo : ${fotografi}"> 
+				<a
+				th:href="@{'/fotografo/' + ${fotografo.id}}"
+				th:text="${fotografo.nome}">nome_fotografo</a>
+			</li>
+		</ul>
 </body>
 </html>
