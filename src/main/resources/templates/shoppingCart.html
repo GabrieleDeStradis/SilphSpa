@@ -18,7 +18,7 @@
 	<br />
 
 	<div th:each="fotografia : ${fotografie}">
-		<div class="panel-heading">
+		<div>
 			<h1>
 				<a th:text="${fotografia.nome}"
 					th:href="@{'/fotografia/' + ${fotografia.id}}">Title</a>
@@ -26,16 +26,21 @@
 		</div>
 		<div>
 			<a th:href="@{'/shoppingCart/rimuoviFotografia/{id}'(id=${fotografia.id})}" ><button
-					type="button" class="btn btn-primary" th:text="Remove">Rimuovi</button>
+					type="button" th:text="Rimuovi">Rimuovi</button>
 			</a>
 		</div>
-		<br></br>
+		<br/>
 	</div>
 
 	<div>
-		<a th:href="@{'/shoppingCart/checkout'}" class="col-md-1">
+		<a th:if="${fotografie.size() != 0}" th:href="@{'/shoppingCart/checkout'}">
 			<button type="button" th:text="Checkout">Checkout</button>
 		</a>
+		<span th:if="${fotografie.size() == 0}">
+		Per poter proseguire seleziona fotografie dalla	
+		<a th:href="@{/gallery}" th:text="gallery"></a>			
+		</span>
+		
 	</div>
 
 

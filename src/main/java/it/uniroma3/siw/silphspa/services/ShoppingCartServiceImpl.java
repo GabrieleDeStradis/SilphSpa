@@ -38,6 +38,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		if (fotografie.contains(fotografia)) {
 			
 			this.fotografie.remove(fotografia);
+			
 
 		}else {
 			
