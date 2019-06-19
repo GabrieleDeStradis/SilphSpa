@@ -20,6 +20,11 @@ public class FotografoService {
 	}
 	
 	@Transactional
+	public Fotografo cercaPerNomeECognome(String nome, String cognome) {
+		return this.fotografoRepository.findByNomeAndCognome(nome, cognome);
+	}
+	
+	@Transactional
 	public Fotografo inserisci(Fotografo fotografo) {
 		return this.fotografoRepository.save(fotografo);
 	}

@@ -13,7 +13,12 @@
 		<br/>
 		<input type="file" name="image_file" accept=".jpg, .jpeg" required>
 		<br/>
-		<br/>
+		<span>
+		<a th:href="@{/addFotografia/addFotografoEsistente}">Seleziona fotografo</a>
+		</span>
+		<br>oppure</br>
+		Nome Fotografo: <input type="text" th:field="*{fotografo.nome}" required>
+		Cognome Fotografo: <input type="text" th:field="*{fotografo.cognome}" required>
 		<button type="submit">UPLOAD</button>
 	</form>
 </body>

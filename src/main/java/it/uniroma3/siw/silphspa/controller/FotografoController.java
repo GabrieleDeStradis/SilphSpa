@@ -53,6 +53,13 @@ public class FotografoController {
 		return "fotografi";
 	}
 	
+	/*da implementare*/
+	@RequestMapping(value="addFotografia/addFotografoEsistente", method=RequestMethod.POST)
+	public String addFotografoPerFotografia(Model model) {
+		return null;
+		//TODO
+	}
+	
 	@RequestMapping(value = "/fotografo", method = RequestMethod.POST)
 	public String newFotografo(@Valid @ModelAttribute("fotografo") Fotografo fotografo, Model model,
 			BindingResult bindingResult) {
