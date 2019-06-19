@@ -9,14 +9,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import it.uniroma3.siw.silphspa.model.Fotografia;
 import it.uniroma3.siw.silphspa.services.FotografiaService;
-import it.uniroma3.siw.silphspa.services.ShoppingCartService;
 import it.uniroma3.siw.silphspa.services.ShoppingCartServiceImpl;
 
 @Controller
 public class ShoppingCartController {
 
 	private final ShoppingCartServiceImpl shoppingCartService;
-
+	
 	private final FotografiaService fotografiaService;
 
 	@Autowired
@@ -32,7 +31,8 @@ public class ShoppingCartController {
 		return modelAndView;
 	}
 
-	/* seguono due metodi sovraccarichi per la gestione dell'aggiunta di fotografie al carrello */
+	/* seguono due metodi sovraccarichi per la gestione dell'aggiunta di fotografie al carrello
+	 * entrambi reagiscono allo stesso modo tramite */
 	@GetMapping("/shoppingCart/addFotografia/{fotografiaId}")
 	public ModelAndView aggiungiFotografiaAlCarrello(@PathVariable("fotoId") Long fotoId) {
 		if (!this.shoppingCartService.getFotografieNelCarrello().contains(this.fotografiaService.
@@ -42,7 +42,11 @@ public class ShoppingCartController {
 		return shoppingCart();
 	}
 	
-	@GetMapping(value="/shoppingCart/aggiungiAlCarrelloDallaGallery")
+	@GetMapping(value= {"/shoppingCart/aggiungiAlCarrelloDallaGallery",
+						"/album/shoppingCart/aggiungiAlCarrelloDallAlbum",
+						"/shoppingCart/aggiungiAlCarrelloDallAlbum",
+						"/fotografiePerFotografo/shoppingCart/aggiungiAlCarrelloDalleFotografie",
+						"/shoppingCart/aggiungiAlCarrelloDalleFotografie"})
 	public ModelAndView aggiungiFotoAlCarrello(@RequestParam("fotoPath") String fotoPath) {
 		/* stessa logica del metodo aggiungiFotografiaAlCarrello(...) ma usa il path della foto */
 		Fotografia foto = this.fotografiaService.cercaPerId(extractIdFromPath(fotoPath));
@@ -73,7 +77,6 @@ public class ShoppingCartController {
 	 * @return (Long) id
 	 */
 	private Long extractIdFromPath(String path) {
-		System.out.println("PASSED PATH IS\n"+path);
 		char[] name_file = path.substring(17).toCharArray();
 		String id_string = "";
 		for (char c : name_file) {
@@ -83,7 +86,6 @@ public class ShoppingCartController {
 				id_string = id_string.concat(Character.toString(c));
 			}
 		}
-		System.out.println("string for id is ->"+id_string);
 		return Long.parseLong(id_string);
 	}
 }

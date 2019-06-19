@@ -1,6 +1,6 @@
 package it.uniroma3.siw.silphspa.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
@@ -18,14 +18,14 @@ import java.util.List;
 @Transactional
 public class ShoppingCartServiceImpl implements ShoppingCartService{
 
-	private final FotografiaService fotografiaService;
+	//private final FotografiaService fotografiaService;
 
 	private List<Fotografia> fotografie = new ArrayList<>();
 
-	@Autowired
+	/*@Autowired
 	public ShoppingCartServiceImpl(FotografiaService fotografiaService) {
 		this.fotografiaService = fotografiaService;
-	}
+	}*/
 
 	@Override
 	public void aggiungiFotografia(Fotografia fotografia) {

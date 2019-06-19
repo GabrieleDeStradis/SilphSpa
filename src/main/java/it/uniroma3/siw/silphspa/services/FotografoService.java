@@ -30,7 +30,7 @@ public class FotografoService {
 	}
 	
 	@Transactional
-	public Fotografo fotografoPerId(Long id) {
+	public Fotografo cercaPerId(Long id) {
 		return this.fotografoRepository.findById(id).get();
 	}
 

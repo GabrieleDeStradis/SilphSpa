@@ -7,6 +7,7 @@ import java.util.List;
 
 import it.uniroma3.siw.silphspa.model.Album;
 import it.uniroma3.siw.silphspa.model.Fotografia;
+import it.uniroma3.siw.silphspa.model.Fotografo;
 import it.uniroma3.siw.silphspa.repository.FotografiaRepository;
 
 @Service
@@ -37,5 +38,10 @@ public class FotografiaService {
 	@Transactional
 	public List<Fotografia> cercaPerAlbum(Album album) {
 		return (List<Fotografia>) this.fotografiaRepository.findByAlbum(album);
+	}
+
+	@Transactional
+	public List<Fotografia> cercaPerFotografo(Fotografo fotografo) {
+		return (List<Fotografia>)this.fotografiaRepository.findByFotografo(fotografo);
 	}
 }

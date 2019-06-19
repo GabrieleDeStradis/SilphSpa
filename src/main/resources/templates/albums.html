@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/css/style.css" />
 <title>AlbumsPage</title>
 </head>
 <body>
-	<h1>NOT YET IMPLEMENTED</h1>
+	<div class="title"><h1>Albums</h1></div>
+	<br/>
+	
+	<ul>
+		<li th:each="album : ${albums}" th:object="${album}">
+			<a th:text="*{nome}" th:href="@{'/album/'+*{id}}"></a>
+		</li>
+	</ul>
 </body>
 </html>

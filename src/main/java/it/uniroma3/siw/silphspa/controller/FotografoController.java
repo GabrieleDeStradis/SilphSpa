@@ -38,7 +38,7 @@ public class FotografoController {
 		
 		if(id!=null) {
 			
-			model.addAttribute("fotografo", this.fotografoService.fotografoPerId(id));
+			model.addAttribute("fotografo", this.fotografoService.cercaPerId(id));
 			return "fotografo.html";
 			
 		}else {

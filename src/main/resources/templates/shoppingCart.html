@@ -3,11 +3,17 @@
 	xmlns="http://www.w3.org/1999/html">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/css/style.css" />
 <title>Carrello</title>
 </head>
 <body>
-	<div>
-		Torna alla <a th:href="@{/gallery}" th:text="Gallery"></a>
+	<div class="title"><h1>Carrello</h1></div>
+	<div align="center">
+		<form th:action="@{/gallery}">
+			<input type="button" value="Go Back" onClick="history.go(-1);">
+			<span>&emsp;</span>
+			<button type="submit">Go To Gallery</button>
+		</form>
 	</div>
 	<br />
 

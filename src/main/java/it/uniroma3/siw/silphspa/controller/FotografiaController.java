@@ -16,10 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import it.uniroma3.siw.silphspa.model.Album;
 import it.uniroma3.siw.silphspa.model.Fotografia;
-import it.uniroma3.siw.silphspa.services.AlbumService;
 import it.uniroma3.siw.silphspa.services.FotografiaService;
+import it.uniroma3.siw.silphspa.services.FotografoService;
 
 @Controller
 public class FotografiaController {
@@ -27,7 +26,7 @@ public class FotografiaController {
 	@Autowired
 	private FotografiaService fotografiaService;
 	@Autowired
-	private AlbumService albumService;
+	private FotografoService fotografoService;
 
 	/* path della directory per la gestione della galleria di immagini */
 	/*System.getProperty("user.dir")+"/src/main/resources/static/*/
@@ -66,7 +65,7 @@ public class FotografiaController {
 	 * @param foto - oggetto di tipo Fotografia
 	 * @return la stringa al percorso da usare nelle pagine html, null altrimenti
 	 */
-	protected static String downloadMethod(Fotografia foto) {
+	protected String downloadMethod(Fotografia foto) {
 		String file_name = foto.getId().toString()+"_"+foto.getNome();
 		File file = new File(download_path+file_name);
 		if (!file.exists()) { //se il file immagine non esiste lo creo
@@ -98,29 +97,55 @@ public class FotografiaController {
 	@RequestMapping(value="/gallery", method=RequestMethod.GET)
 	public String visualizzaGalleriaFotografie(Model model) {
 		/* recupero tutti gli oggetti Fotografia salvati nel db */
-		List<Fotografia> fotografie = this.fotografiaService.tutte();/* riempio la directory creando i relativi file .jpg
+		List<Fotografia> fotografie = this.fotografiaService.tutte();
+		/* riempio la directory creando i relativi file .jpg
 		 * inoltre creo una lista con tutti i percorsi relativi ai files creati */
-		List<String> files_galleria = new LinkedList<>();
-		String temp_filepath = "";
-		for (Fotografia f : fotografie) {
-			temp_filepath = downloadMethod(f);
-			if (temp_filepath==null) {
-				model.addAttribute("erroreIO", "non riesco a scaricare il file "+f.getId()+"_"+f.getNome());
-				return "myErrorPage";
-			}
-			files_galleria.add(temp_filepath);
+		List<String> files_galleria = getPaths(fotografie);
+		if (files_galleria==null) { //la lista dei paths e' vuota
+			model.addAttribute("erroreIO", "non riesco a scaricare tutti i file, leggi la console di eclipse");
+			return "myErrorPage";
 		}
 		model.addAttribute("files_galleria", files_galleria);
 		return "gallery";
 	}
-	
-	@RequestMapping(value="/fotografieDaAlbum/{id_album}",method=RequestMethod.GET)
-	public String visualizzFotografieAlbum(@PathVariable("id_album") Long id_album, Model model) {
-		Album album = this.albumService.cercaPerId(id_album);
-		model.addAttribute("fotografie",this.fotografiaService.cercaPerAlbum(album));
-		model.addAttribute("album",album);
+
+	/**
+	 * Questo metodo si occupa di scaricare le fotografie presenti nella lista passata per parametro
+	 * crea inoltre una lista con tutti i percorsi di riferimento per la visualizzazione
+	 * @param List<Fotografia> fotografie
+	 * @return List<String> percorsi alle foto
+	 */
+	protected List<String> getPaths(List<Fotografia> fotografie) {
+		List<String> file_paths = new LinkedList<>();
+		String temp_filepath = "";
+		for (Fotografia f : fotografie) {
+			temp_filepath = downloadMethod(f);
+			if (temp_filepath==null) {
+				System.out.println("non riesco a scaricare il file "+f.getId()+"_"+f.getNome());
+				return null;
+			}
+			file_paths.add(temp_filepath);
+		}
 		
-		return "fotografieAlbum";
+		return file_paths;
+	}
+	
+	/**
+	 * Questo metodo gestisce la visualizzazione delle fotografie di un fotografo
+	 * @param model
+	 * @return la prossima vista
+	 */
+	@RequestMapping(value="/fotografiePerFotografo/{id_fotografo}", method=RequestMethod.GET)
+	public String visualizzaFotografieFotografo(@PathVariable("id_fotografo")Long id_fotografo, Model model) {
+		List<Fotografia> fotografieFotografo = 
+				this.fotografiaService.cercaPerFotografo(this.fotografoService.cercaPerId(id_fotografo));
+		List<String> file_paths = getPaths(fotografieFotografo);
+		if (file_paths==null) { //la lista dei paths e' vuota
+			model.addAttribute("erroreIO", "non riesco a scaricare tutti i file, leggi la console di eclipse");
+			return "myErrorPage";
+		}
+		model.addAttribute("fotografie_paths", file_paths);
+		return "fotografie";
 	}
 	
 }

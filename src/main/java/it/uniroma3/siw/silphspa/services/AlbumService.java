@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.siw.silphspa.model.Album;
+import it.uniroma3.siw.silphspa.model.Fotografo;
 import it.uniroma3.siw.silphspa.repository.AlbumRepository;
 
 @Service
@@ -33,6 +34,11 @@ public class AlbumService {
 	@Transactional
 	public List<Album> tutti() {
 		return (List<Album>)this.albumRepository.findAll();
+	}
+
+	@Transactional
+	public List<Album> cercaPerFotografo(Fotografo fotografo) {
+		return (List<Album>)this.albumRepository.findByFotografo(fotografo);
 	}
 
 }

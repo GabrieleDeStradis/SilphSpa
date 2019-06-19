@@ -1,5 +1,7 @@
 package it.uniroma3.siw.silphspa.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,8 @@ public class MainController {
 	private FotografoService fotografoService;
 	@Autowired
 	private AlbumService albumService;
+	@Autowired
+	private FotografiaController fotografiaController;
 
 	@RequestMapping(value="/about",method=RequestMethod.GET)
 	public String mostraInformazioni() {
@@ -59,7 +63,7 @@ public class MainController {
 				}
 				else {
 					model.addAttribute("fotografia", fotografia_trovata);
-					model.addAttribute("fotoPath", FotografiaController.downloadMethod(fotografia_trovata));
+					model.addAttribute("fotoPath", fotografiaController.downloadMethod(fotografia_trovata));
 					nextPage = "fotografia";
 				}
 			}
@@ -71,6 +75,9 @@ public class MainController {
 					return "notFoundPage";
 				}
 				else {
+					List<String> fotografie_paths = 
+							fotografiaController.getPaths(this.fotografiaService.cercaPerAlbum(album_trovato));
+					model.addAttribute("fotografie_paths",fotografie_paths);
 					model.addAttribute("album", album_trovato);
 					nextPage = "album";
 				}
