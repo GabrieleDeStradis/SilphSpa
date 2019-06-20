@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/style.css" />
+<title>Inserimento Fotografo</title>
+</head>
 <body>
-	<div>
-		<h4>Inserisci i dati del fotografo</h4>
-	</div>
+	<div class="title"><h4>Inserimento fotografo</h4></div>
+	<div><i>Inserisci i dati</i></div>
+	<br/>
+	
 	<form th:action="@{/fotografo}" method="POST" th:object="${fotografo}">
 		<table>
 			<tr> <!-- riga -->

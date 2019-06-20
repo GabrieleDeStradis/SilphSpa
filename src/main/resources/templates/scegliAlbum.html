@@ -8,14 +8,16 @@
 </head>
 <body>
 	<div class="title"><h4>Scelta album</h4></div>
-	<div><i>Scegli un album del fotografo selezionato</i></div>
+	<div><i>Scegli un album del fotografo selezionato oppure <a th:href="@{'/creaAlbum/'+${fotografo}}" 
+																th:text="'crea nuovo album'">
+			</a></i></div>
+	<br/>
 	<div>
 		<ul>
 			<li th:each="album : ${albums_fotografo}">
 				<span th:text="${album.nome}"></span>
 				<a th:href="@{'/scegliFotografia/'+${fotografo}+'/'+${album.id}}">
-					<button type="button" th:text="Seleziona"></button>
-				</a>
+					<button type="button" th:text="Seleziona"></button></a>
 				<br/>
 				<br/>
 			</li>

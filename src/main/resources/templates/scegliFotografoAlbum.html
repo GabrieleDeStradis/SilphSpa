@@ -16,7 +16,7 @@
 			<li th:each="fotografo : ${fotografi}" th:object="${fotografo}">
 				<span th:text="*{nome}"></span>
 				<span th:text="*{cognome}"></span>
-				<a th:href="@{'/scegliAlbum/'+*{id}}">
+				<a th:href="@{'/creaAlbum/'+*{id}}">
 					<button type="button" th:text="Seleziona"></button></a>
 				<br/>
 				<br/>

@@ -11,11 +11,5 @@ public class FunzionarioController {
 	public String returnToHomeFunzionario() {
 		return "funzionarioHome";
 	}
-	
-	/*@RequestMapping("/indiceAlbum")
-	public String album() {
-		return "albumIndex.html";
-		
-	}*/	
 
 }

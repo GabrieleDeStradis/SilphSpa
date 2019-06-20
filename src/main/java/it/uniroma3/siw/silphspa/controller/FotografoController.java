@@ -53,13 +53,6 @@ public class FotografoController {
 		return "fotografi";
 	}
 	
-	/*da implementare*/
-	@RequestMapping(value="addFotografia/addFotografoEsistente", method=RequestMethod.POST)
-	public String addFotografoPerFotografia(Model model) {
-		return null;
-		//TODO
-	}
-	
 	@RequestMapping(value = "/fotografo", method = RequestMethod.POST)
 	public String newFotografo(@Valid @ModelAttribute("fotografo") Fotografo fotografo, Model model,
 			BindingResult bindingResult) {
@@ -68,8 +61,8 @@ public class FotografoController {
 		if(!bindingResult.hasErrors()) {
 			
 			this.fotografoService.inserisci(fotografo);
-			model.addAttribute("fotografi", this.fotografoService.tutti());
-			return "fotografi.html";
+			model.addAttribute("messaggioConferma","Fotografo correttamente salvato!");
+			return "funzionarioHome";
 			
 		}else {
 			
@@ -78,7 +71,4 @@ public class FotografoController {
 		}
 
 	}
-	
-	
-
 }

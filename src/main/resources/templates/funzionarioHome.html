@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/style.css" />
+<title>Benvenuto Funzionario</title>
+</head>
 <body>
 <div class="title"><h1>Benvenuto</h1></div>
-<div>
-<h4>Seleziona un'attivit‡</h4>
-</div>
+<div><h4><i>Seleziona un'attivit√†</i></h4></div>
+
+<div class="ok_message" th:if="${messaggioConfemra}" th:text="${messaggioConferma}">messaggio_di_conferma</div>
+
 <div>
 <span><a th:href="@{/addFotografo}">Aggiungi fotografo</a></span>
 </div>
@@ -14,7 +20,6 @@
 
 <div>
 <span><a th:href="@{/addFotografia}">Aggiungi fotografia</a></span>
-<span th:if=${messaggioConferma}>&emsp;<span class="ok_message" th:text="${messaggioConferma}"></span></span>
 </div>
 
 <br/>
@@ -22,5 +27,6 @@
 <div>
 <span><a th:href="@{/addAlbum}">Aggiungi album</a></span>
 </div>
+
 </body>
 </html>
