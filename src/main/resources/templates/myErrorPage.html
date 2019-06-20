@@ -6,8 +6,19 @@
 <title>Personal ErrorPage</title>
 </head>
 <body>
-	<h1>something went wrong...</h1>
+	<div class="topnavbar">
+		<br/>
+		<a th:href="@{/}">Home</a>
+		<span>&emsp;</span>
+		<a th:href="@{/about}">About</a>
+		<br/>
+	</div>
+	<div class="title"><h1>Something went wrong...</h1></div>
+	
 	<br/>
+	<br/>
+	<br/>
+	
 	<div th:text="${erroreIO}">errore_IO</div>
 	<div th:text="${erroreGenerico}">messaggio_errore_generico</div>
 </body>

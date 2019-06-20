@@ -7,11 +7,18 @@
 <title>Gallery Fotografie</title>
 </head>
 <body>
-	<div class="title">
-		<h1>Fotografie della Silph Spa</h1>
-		<a class="carrello_image" th:href="@{/shoppingCart}"><img src="/icons/cart.png" alt="carrello immagine"></a>
-		<a class="home_image" th:href="@{/}"><img src="/icons/home-57.png" alt="home immagine"></a>
+	<div class="topnavbar">
+		<br/>
+		<a th:href="@{/}">Home</a>
+		<span>&emsp;</span>
+		<a th:href="@{/about}">About</a>
+		<br/>
 	</div>
+	<div class="title">
+		<h1>Gallery</h1>
+		<a class="carrello_image" th:href="@{/shoppingCart}"><img src="/icons/cart.png" alt="carrello immagine"></a>
+	</div>
+	
 	<div style="padding-left: 300px">
 		<i>seleziona le foto che vorresti utilizzare cliccando sul bottone a lato immagine</i>
 	</div>

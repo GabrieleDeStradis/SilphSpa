@@ -7,7 +7,19 @@
 <title>Scelta Album</title>
 </head>
 <body>
-	<div class="title"><h4>Scelta album</h4></div>
+	<div class="topnavbar">
+		<br/>
+		<a th:href="@{/homeFunzionario}">Home</a>
+		<span>&emsp;</span>
+		<a th:href="@{/about}">About</a>
+		<br/>
+	</div>
+	<div class="title"><h1>Scelta album</h1></div>
+	
+	<br/>
+	<br/>
+	<br/>
+	
 	<div><i>Scegli un album del fotografo selezionato oppure <a th:href="@{'/creaAlbum/'+${fotografo}}" 
 																th:text="'crea nuovo album'">
 			</a></i></div>

@@ -7,15 +7,16 @@
 <title>HomePage</title>
 </head>
 <body>	
-	<div class="title"><h1>Silph Spa</h1></div>
 	<div class="topnavbar">
 		<br/>
 		<a th:href="@{/}">Home</a>
-		<span>	</span>
+		<span>&emsp;</span>
 		<a th:href="@{/about}">About</a>
+		<span>&emsp;</span>
 		<a th:href="@{/login}">LoginFunzionario</a>
 		<br/>
 	</div>
+	<div class="title"><h1>Silph Spa</h1></div>
 	
 	<br/>
 	<br/>
@@ -30,7 +31,7 @@
 					<option title="album" value="Album">Album</option>
 				</optgroup>
 			</select>
-			<input th:field="*{query}" type="text" placeholder="Search...">
+			<input th:field="*{query}" type="text" placeholder="Cerca...">
 			<br/>
 			<button type="submit"><img src="/icons/search.png"></img></button>
 			

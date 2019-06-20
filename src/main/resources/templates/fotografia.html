@@ -8,17 +8,17 @@
 </head>
 <body>
 	<div class="topnavbar">
-		<h1 class="title"><b>Silph Spa</b></h1>
-		<br>
+		<br/>
 		<a th:href="@{/}">Home</a>
-		<span>	  </span>
+		<span>&emsp;</span>
 		<a th:href="@{/about}">About</a>
+		<br/>
 	</div>
+	<div class="title"><h1>Fotografia</h1></div>
 	
 	<br/>
 	<br/>
 	<br/>
-	
 	
 	<div th:if="${isASearch}"><h3 class="ok_message">Fotografia trovata!</h3></div>
 	<div th:text="'Nome: '+${fotografia.nome}">foto_nome</div>

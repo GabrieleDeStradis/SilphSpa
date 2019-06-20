@@ -20,12 +20,13 @@ public class SilphSpaApplication {
 			
 			/* cancello e ricreo la cartella classpath:/src/main/resources/static/downloads_silph/ */
 			File file = new File(application_pathToStaticFolder+"/downloads_silph/");
-			deleteDirectory(file);
-			if (file.mkdir())
-				SpringApplication.run(SilphSpaApplication.class, args);
-			else
+			/*deleteDirectory(file);*/
+			//if (file.mkdir())
+			file.mkdir();
+			SpringApplication.run(SilphSpaApplication.class, args);
+			/*else
 				System.out.println("NON SONO RIUSCITO A CREARE LA CARTELLA DOWNLOADS");
-			
+			*/
 		} catch (IOException e) {
 			System.out.println("errore I/O, leggi lo stack sotto");
 			e.printStackTrace();
@@ -38,7 +39,7 @@ public class SilphSpaApplication {
 	 * @param path - il percorso alla directory destinata
 	 * @return true se la cancellazione e' andata a buon fine, false altrimenti
 	 */
-	private static boolean deleteDirectory(File path) {
+	/*private static boolean deleteDirectory(File path) {
 		if (path.exists()) {
 			File[] files = path.listFiles();
 			for( File f : files ) {
@@ -70,6 +71,6 @@ public class SilphSpaApplication {
 			}
 			return false;
 		}
-	}
+	}*/
 
 }

@@ -1,18 +1,26 @@
 @charset "UTF-8";
 
-/*body {
-	background-image: url("/css/homePageImage.jpg");
-}*/
+body {
+	/*background-image: url("/css/MODhomePageImage.jpg");*/
+	/*opacity: 0.4;*/
+}
 
 .topnavbar {
-	background-color: gray;
+	background-image: url("/css/MODhomePageImage.jpg");
+	height: 170px;
 }
-.topnavbar h1 {
+/*.topnavbar title {
+	background-color: lightgrey;
 	font-family: cursive;
 	float: center;
 	color: orange;
-	font-size: large;
+	font-size: xx-large;
 	font-style: bold;
+}*/
+.topnavbar a {
+	background-color: lightgrey;
+	font-size: large;
+	font-family: cursive;
 }
 
 .title {
@@ -53,7 +61,7 @@
 }
 
 .searchbar {
-	size: 500px;
+	size: 600px;
 }
 
 .gallery_image {
