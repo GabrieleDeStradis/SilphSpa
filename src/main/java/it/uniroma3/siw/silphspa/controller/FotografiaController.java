@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import it.uniroma3.siw.silphspa.model.Album;
 import it.uniroma3.siw.silphspa.model.Fotografia;
+import it.uniroma3.siw.silphspa.model.Fotografo;
+import it.uniroma3.siw.silphspa.services.AlbumService;
 import it.uniroma3.siw.silphspa.services.FotografiaService;
 import it.uniroma3.siw.silphspa.services.FotografoService;
 
@@ -27,40 +30,15 @@ public class FotografiaController {
 	private FotografiaService fotografiaService;
 	@Autowired
 	private FotografoService fotografoService;
+	@Autowired
+	private AlbumService albumService;
 
 	/* path della directory per la gestione della galleria di immagini */
 	/*System.getProperty("user.dir")+"/src/main/resources/static/*/
 	private String download_path = //was protected static
 			it.uniroma3.siw.silphspa.SilphSpaApplication.application_pathToStaticFolder+"/downloads_silph/";
 	
-	/**
-	 * Questo metodo gestisce il caricamento sul database di un oggetto fotografia 
-	 * @param file - questo file sara' scelto dall'utente durante l'uso della webapp
-	 * @param foto - l'oggetto fotografia in salvataggio
-	 * @param model
-	 * @return la prossima vista
-	 */
-	@RequestMapping(value="/upload", method=RequestMethod.POST)
-	public String uploadMethod(@RequestParam("image_file")MultipartFile file,
-			@ModelAttribute("fotografia")Fotografia foto, Model model) {
-		try {
-			foto.setImmagine(file.getBytes());
-			if (!foto.getNome().contains(".jpg")) //aggiungo il tipo di file per le foto non predefinite
-				foto.setNome(foto.getNome().concat(".jpg"));
-			Fotografia savedFoto = this.fotografiaService.inserisci(foto);
-			model.addAttribute("foto", savedFoto);
-			if (downloadMethod(savedFoto)!=null)
-				return "fotografiaSalvata";
-			else {
-				model.addAttribute("erroreIO", "non sono riuscito a creare il file dall'array di byte");
-				return "myErrorPage";
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			model.addAttribute("erroreIO", "non sono riuscito a creare l'array di byte dal file");
-			return "myErrorPage";
-		}
-	}
+	
 
 	/**
 	 * Questo metodo prende un oggetto Fotografia e ne crea il relativo file .jpg nella directory destinata alla gallery
@@ -85,10 +63,83 @@ public class FotografiaController {
 			return ("/downloads_silph/"+file_name);
 	}
 	
-	@RequestMapping(value="/addFotografia", method=RequestMethod.GET)
+	/*@RequestMapping(value="/addFotografia", method=RequestMethod.GET)
 	public String aggiungiFotografia(Model model) {
 		model.addAttribute("fotografia", new Fotografia());
 		return "fotografiaForm";
+	}*/
+	
+	@RequestMapping(value="/addFotografia", method=RequestMethod.GET)
+	public String aggiungiFotografoAllaFotografia(Model model) {
+		model.addAttribute("fotografia", new Fotografia());
+		model.addAttribute("fotografi",this.fotografoService.tutti());
+		return "scegliFotografo";
+	}
+	
+	@RequestMapping(value="/scegliAlbum/{id_fotografo}", method=RequestMethod.GET)
+	public String aggiungiAlbumAllaFotografia(@PathVariable("id_fotografo")Long id_fotografo, 
+			@ModelAttribute("fotografia")Fotografia fotografia, Model model) {
+		Fotografo fotografo = this.fotografoService.cercaPerId(id_fotografo);
+		model.addAttribute("fotografo",id_fotografo);
+		model.addAttribute("albums_fotografo",fotografo.getAlbums());
+		return "scegliAlbum";
+	}
+	
+	@RequestMapping(value="/scegliFotografia/{id_fotografo}/{id_album}", method=RequestMethod.GET)
+	public String aggiungiFileAllaFotografia(@PathVariable("id_album")Long id_album,
+			@PathVariable("id_fotografo")Long id_fotografo,
+			@ModelAttribute("fotografia")Fotografia fotografia,Model model) {
+		model.addAttribute("fotografo",id_fotografo);
+		model.addAttribute("album",id_album);
+		return "scegliFotografia";
+	}
+	
+	/**
+	 * Questo metodo gestisce il caricamento sul database di un oggetto fotografia 
+	 * @param file - questo file sara' scelto dall'utente durante l'uso della webapp
+	 * @param fotografia - l'oggetto fotografia in salvataggio
+	 * @param model
+	 * @return la prossima vista
+	 */
+	@RequestMapping(value="/upload/{id_fotografo}/{id_album}", method=RequestMethod.POST)
+	public String salvaFotografia(@RequestParam("image_file")MultipartFile file,
+			@ModelAttribute("fotografia")Fotografia fotografia, Model model,
+			@PathVariable("id_album")Long id_album, @PathVariable("id_fotografo")Long id_fotografo) {
+		try {
+			
+			Fotografo fotografo = this.fotografoService.cercaPerId(id_fotografo);
+			Album album = this.albumService.cercaPerId(id_album);
+			
+			/* aggiungo gli attributti alla fotografia */
+			fotografia.setAlbum(album);
+			fotografia.setFotografo(fotografo);
+			fotografia.setImmagine(file.getBytes());
+			if (!fotografia.getNome().contains(".jpg")) //aggiungo il tipo di file per le foto non predefinite
+				fotografia.setNome(fotografia.getNome().concat(".jpg"));
+			
+			/* salvo la fotografia */
+			fotografia = this.fotografiaService.inserisci(fotografia);	
+			
+			/* aggiungo i riferimenti alla fotografia e aggiorno le entita' */
+			fotografo.addFoto(fotografia);
+			album.addFotografia(fotografia);
+			
+			this.fotografoService.inserisci(fotografo);
+			this.albumService.inserisci(album);		
+			
+			if (downloadMethod(fotografia)!=null) {
+				model.addAttribute("messaggioConferma","Fotografia correttamente salvata!");
+				return "funzionarioHome";	
+			}
+			else {
+				model.addAttribute("erroreIO", "non sono riuscito a creare il file dall'array di byte");
+				return "myErrorPage";
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			model.addAttribute("erroreIO", "non sono riuscito a creare l'array di byte dal file");
+			return "myErrorPage";
+		}
 	}
 	
 	/**

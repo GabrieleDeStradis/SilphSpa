@@ -12,12 +12,10 @@ public class FunzionarioController {
 		return "funzionarioHome";
 	}
 	
-	@RequestMapping("/indiceAlbum")
+	/*@RequestMapping("/indiceAlbum")
 	public String album() {
 		return "albumIndex.html";
 		
-	}
-	
-	
+	}*/	
 
 }

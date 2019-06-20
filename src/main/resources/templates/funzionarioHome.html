@@ -2,18 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns="http://www.w3.org/1999/html">
 <body>
-<h4>Benvenuto</h4>
+<div class="title"><h1>Benvenuto</h1></div>
 <div>
-seleziona un'attivit√†
+<h4>Seleziona un'attivit‡</h4>
 </div>
 <div>
 <span><a th:href="@{/addFotografo}">Aggiungi fotografo</a></span>
 </div>
+
+<br/>
+
 <div>
-<span><a th:href="@{/addFotografia}">Aggiungi foto</a></span>
+<span><a th:href="@{/addFotografia}">Aggiungi fotografia</a></span>
+<span th:if=${messaggioConferma}>&emsp;<span class="ok_message" th:text="${messaggioConferma}"></span></span>
 </div>
+
+<br/>
+
 <div>
-<span><a th:href="@{/indiceFotografo}">Aggiungi album</a></span>
+<span><a th:href="@{/addAlbum}">Aggiungi album</a></span>
 </div>
 </body>
 </html>

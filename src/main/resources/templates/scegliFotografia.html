@@ -6,20 +6,21 @@
 <title>Inserimento Nuova Fotografia</title>
 </head>
 <body>
-	<h3>Seleziona la foto per salvarla nel db</h3>
-	<h4>BISOGNA COMPLETARE LA FORM</h4>
-	<form th:action="@{/upload}" enctype="multipart/form-data" th:object="${fotografia}" method="post">
-		Nome: <input type="text" th:field="*{nome}" required>
+	<div class="title"><h4>Scelta fotografia</h4></div>
+	<div><i>Seleziona la foto per salvarla nel db</i></div>
+	<form th:action="@{'/upload/'+${fotografo}+'/'+${album}}" enctype="multipart/form-data" method="post">
+		Nome foto: <input type="text" th:field="${fotografia.nome}" required>
 		<br/>
 		<input type="file" name="image_file" accept=".jpg, .jpeg" required>
 		<br/>
-		<span>
+		<br/>
+		<!--  <span>
 		<a th:href="@{/addFotografia/addFotografoEsistente}">Seleziona fotografo</a>
 		</span>
 		<br>oppure</br>
 		Nome Fotografo: <input type="text" th:field="*{fotografo.nome}" required>
-		Cognome Fotografo: <input type="text" th:field="*{fotografo.cognome}" required>
-		<button type="submit">UPLOAD</button>
+		Cognome Fotografo: <input type="text" th:field="*{fotografo.cognome}" required>   -->
+		<button type="submit">Carica</button>
 	</form>
 </body>
 </html>
